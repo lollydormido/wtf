@@ -1,0 +1,39 @@
+body {
+	font-family: "Arial", "Helvetica";
+	font-size: 12px;
+	color: #000000;
+	padding: 0;
+	margin: 0;
+}
+
+#container {
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
+	top: 100px;
+}
+
+#header {
+	font-size: 2 em;
+	font-weight: bold;
+}
+
+#content {
+	border-top: 10px solid #FF7700;
+}
+
+#listenTo {
+	font-size: 7 em;
+	font-weight: bold;
+	display: inline;
+}
+
+#username {
+	font-size: 7 em;
+	font-weight: bold;
+	display: inline;
+}
+
+.user a:link {
+	color: #000000;
+}

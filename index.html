@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title> What the fuck should I listen to?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="container">
+	<div id="header">What the fuck should I listen to?</div>
+	<div id="content">
+		<div id="listenTo"></div>
+		<div id="username" class="user"></div>
+	</div>
+	<div id="track"></div>
+	<div id="shareValue"></div>
+
+</div>
+
+<script type="text/JavaScript">
+	var greetings = ['Listen to some fucking', 'Bet you never fucking heard', 'Your fucking ears will be graced by', 'The fucking music gods have brought you', 'Muh fucking Mozart is channeled through', 'Your fucking life was incomplete without', 'The fucking music Gods have brought you'];
+	
+	var allGreetings = greetings.length;
+	var whichGreeting = Math.floor(allGreetings * Math.random());
+	var listenTo = function () {
+		document.getElementById("listenTo").innerHTML = greetings[whichGreeting];
+	};
+	
+	listenTo();
+</script>
+
+<script src="http://connect.soundcloud.com/sdk.js" type="text/JavaScript"></script>
+<script type="text/JavaScript">
+	SC.initialize({
+		client_id: "7kIeyF5f2ETFo1fEWKwNQ",
+	});
+	
+	var track;
+	var results = this.length;
+	var random = Math.floor(results*Math.random());
+	
+	var getTrack = function() {
+		SC.get("/tracks", {limit: 500}, function(tracks) {
+			track = tracks[random];
+			var soundCloudUser = track.user.username;
+			var soundCloudUserUrl = track.user.permalink_url;
+			document.getElementById("username").innerHTML = (' ' + '<a href="' + soundCloudUserUrl + '">' +  soundCloudUser+ '</a>');
+			SC.oEmbed(track.uri, document.getElementById("track"));
+			});
+	};
+	
+	getTrack();
+	
+	//var getDubstep = function() {
+		//SC.get("/tracks", {genres: 'dubstep'}, function(tracks) {
+		//	var results = tracks.length;
+		//	var random = Math.floor(results*Math.random());
+		//	var track = tracks[random];
+		//	SC.oEmbed(track.uri, document.getElementById("track"));
+		//	});
+		//};
+</script>
+
+
+
+
+
+</body>
+</html>
