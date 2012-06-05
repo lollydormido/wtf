@@ -16,8 +16,8 @@
 	<div id="track"></div>
 	
 	<div id="nav" class="navigate">
-		<a href="" id="somethingElse">I fucking hate this</a>
-		<a href="underground.html" id="somethingIndie">I want some fucking underground</a>
+		<a href="" id="hateThis">I fucking hate this</a>
+		<a href="index.html" id="somethingIndie">This is too fucking obscure</a>
 	</div>
 	
 	<div id="shareValue"></div>
@@ -25,7 +25,7 @@
 </div>
 
 <script type="text/JavaScript">
-	var greetings = ['Listen to some fucking ', 'Bet you never fucking heard this track by ', 'Your fucking ears will be graced by ', 'The fucking music gods have brought you ', 'Muh fucking Mozart is channeled through ', 'Your life was fucking incomplete without ', 'The music Gods have fucking brought you '];
+	var greetings = ['Listen to some fucking ', 'Bet you never fucking heard ', 'Your fucking ears will be graced by   ', 'The fucking music gods have brought you ', 'Muh fucking Mozart is channeled through ', 'Your life was fucking incomplete without ', 'The music Gods have fucking brought you '];
 	
 	var allGreetings = greetings.length;
 	var whichGreeting = Math.floor(allGreetings * Math.random());
@@ -43,13 +43,13 @@
 	});
 	
 	var track;
-		
+	
 	var getTrack = function() {
-		SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
+		SC.get("/tracks?filter=public", {limit: 50}, function(tracks) {
 			var results = tracks.length;
 			var random = Math.floor(results*Math.random());
-			console.log(random);
 			track = tracks[random];
+			console.log(random);
 			var soundCloudUser = track.user.username;
 			var soundCloudUserUrl = track.user.permalink_url;
 			document.getElementById("username").innerHTML = (' ' + '<a href="' + soundCloudUserUrl + '">' +  soundCloudUser+ '</a>');
@@ -58,15 +58,6 @@
 	};
 	
 	getTrack();
-	
-	//var getDubstep = function() {
-		//SC.get("/tracks", {genres: 'dubstep'}, function(tracks) {
-		//	var results = tracks.length;
-		//	var random = Math.floor(results*Math.random());
-		//	var track = tracks[random];
-		//	SC.oEmbed(track.uri, document.getElementById("track"));
-		//	});
-		//};
 </script>
 
 
