@@ -1,0 +1,116 @@
+<html>
+<head>
+  <title> What the fuck should I listen to?</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="sc-player/css/sc-player-minimal.css" type="text/css" />
+  
+</head>
+<body id="body">
+<div id="fb-root"></div>
+<script type=text/javascript>(function(){function b(e){if(!d[e]){var f=d[e]={exports:{}};c[e].call(f.exports,a,f,b)}return d[e].exports}var a=this,c=b.modules=[],d=b.cache=[];c[0]=function(a,b,c){function J(a){n(a)&&(a=document.getElementById(a));if(!!a){if(arguments.length>1){var b=arguments[1],c=arguments[2]||{};a.src=j+"?url="+b+"&"+B(c)}var d=y(s(a));if(d&&d.instance)return d.instance;var e=m.indexOf(s(a))>-1,f=new F(a);l.push(new E(f,a,e));return f}}function D(a){var b,c,d,e;try{c=JSON.parse(a.data)}catch(f){}b=y(a.source),d=c.method,e=c.value,d===i.READY&&(b?(b.isReady=!0,C(b,k),v(k,b)):m.push(a.source));if(!b||a.origin!==b.domain)return!1;var g=[];e!==undefined&&g.push(e),C(b,d,g)}function C(a,b,c){var d,e,f=a.callbacks[b]||[];for(d=0,e=f.length;d<e;d++)f[d].apply(a.instance,c);if(p(b)||b===i.READY)a.callbacks[b]=[]}function B(a){var b,c,d=[];for(b in a)a.hasOwnProperty(b)&&(c=a[b],d.push(b+"="+(b==="start_track"?parseInt(c,10):c?"true":"false")));return d.join("&")}function A(a,b,c){var d,e,f;for(d=0,e=b.length;d<e;d++)f=b[d],a[f]=z(f,c)}function z(a,b){return function(c){var d=o(c),e=x(this),f=!d&&b?c:null,g=d&&!b?c:null;g&&u(a,g,e),w(a,f,e.element);return this}}function y(a){var b;q(function(c){if(s(c.element)===a){b=c;return!1}});return b}function x(a){var b;q(function(c){if(c.instance===a){b=c;return!1}});return b}function w(a,b,c){var d=s(c);if(!d.postMessage)return!1;var e=c.getAttribute("src").split("?")[0],f=JSON.stringify({method:a,value:b});e.substr(0,2)==="//"&&(e=window.location.protocol+e),d.postMessage(f,e)}function v(a,b){var c=!0,d;b.callbacks[a]=[],q(function(b){d=b.callbacks[a]||[];if(d.length){c=!1;return!1}});return c}function u(a,b,c){c.callbacks[a]=c.callbacks[a]||[],c.callbacks[a].push(b)}function t(a){var b=[],c;for(c in a)a.hasOwnProperty(c)&&b.push(a[c]);return b}function s(a){return a.contentWindow||a.contentDocument.parentWindow}function r(a){var b="",c,d;a.substr(0,2)==="//"&&(a=window.location.protocol+a);var e=a.split("/");for(c=0,d=e.length;c<d;c++){if(c<3)b+=e[c];else break;c<2&&(b+="/")}return b}function q(a){var b,c,d;for(b=0,c=l.length;b<c;b++){d=a(l[b]);if(d===!1)break}}function p(a){var b=!1,c;for(c in f)if(f.hasOwnProperty(c)&&f[c]===a){b=!0;break}return b}function o(a){return!!(a&&a.constructor&&a.call&&a.apply)}function n(a){return!!(a===""||a&&a.charCodeAt&&a.substr)}var d=this,e=c(1),f=c(2),g=c(3),h=e.bridge,i=e.api,j="http://wt.soundcloud.com/player/",k="__LATE_BINDING__",l=[],m=[],E=function(a,b,c){this.instance=a,this.element=b,this.domain=r(b.getAttribute("src")),this.isReady=!!c,this.callbacks={}},F=function(){},G=F.prototype={load:function(a,b){if(!!a){b=b||{};var c=this,d=x(this),e=d.element,f=e.src,g=f.substr(0,f.indexOf("?"));d.isReady=!1,e.onload=function(){c.bind(i.READY,function(){var a,c=d.callbacks;for(a in c)c.hasOwnProperty(a)&&a!==i.READY&&w(h.ADD_LISTENER,a,d.element);b.callback&&b.callback()})},e.src=g+"?url="+a+"&"+B(b)}},bind:function(a,b){var c=this,d=x(this);d&&d.element&&(a===i.READY&&d.isReady?setTimeout(b,1):d.isReady?(u(a,b,d),w(h.ADD_LISTENER,a,d.element)):u(k,function(){c.bind(a,b)},d));return this},unbind:function(a){var b=x(this);if(b&&b.element){var c=v(a,b);a!==i.READY&&c&&w(h.REMOVE_LISTENER,a,b.element)}}},H=t(f),I=t(g);A(G,H),A(G,I,!0),window.addEventListener?window.addEventListener("message",D,!1):window.attachEvent("onmessage",D),J.Events=i,a.SC=a.SC||{},a.SC.Widget=J},c[1]=function(a,b,c){var d=this;d.api={LOAD_PROGRESS:"loadProgres",PLAY_PROGRESS:"playProgress",PLAY:"play",PAUSE:"pause",FINISH:"finish",SEEK:"seek",READY:"ready",OPEN_SHARE_PANEL:"sharePanelOpened",SHARE:"share",CLICK_DOWNLOAD:"downloadClicked",CLICK_BUY:"buyClicked"},d.bridge={REMOVE_LISTENER:"removeEventListener",ADD_LISTENER:"addEventListener"}},c[2]=function(a,b,c){var d=this;b.exports={GET_VOLUME:"getVolume",GET_DURATION:"getDuration",GET_POSITION:"getPosition",GET_SOUNDS:"getSounds",GET_CURRENT_SOUND:"getCurrentSound",GET_CURRENT_SOUND_INDEX:"getCurrentSoundIndex",IS_PAUSED:"isPaused"}},c[3]=function(a,b,c){var d=this;b.exports={PLAY:"play",PAUSE:"pause",TOGGLE:"toggle",SEEK_TO:"seekTo",SET_VOLUME:"setVolume",NEXT:"next",PREV:"prev",SKIP:"skip"}},b(0)})()</script>
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=252090111493728";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+		<div id="shareValue">
+		
+			<div margin="2px" class="fb-like" data-href="http://jiggabits.github.com/whatthefuckshouldilistento" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true"></div><BR>
+			
+			<a href="https://twitter.com/share" class="twitter-share-button" data-text="What the fuck should you listen to?" data-via="jiggabits" data-hashtags="SoundCloudAPI">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+
+	<div id="container">
+		<div id="header">What the fuck should I listen to?</div>
+		        <a href="http://soundcloud.com/chamanisme/special" class="sc-player special">Works</a>
+		        <div id="music2"></div>
+		<div id="content">
+			<div id="listenToGreeting"></div>
+			<div id="username" class="user"></div>
+		</div>
+		
+		<div id="music"></div>
+
+		
+		<div id="nav" class="navigate">
+			<a href="" id="somethingElse">I fucking hate this</a>
+			<a href="underground.html" id="somethingIndie">I want some fucking underground</a>
+		</div>
+		
+	</div>
+	
+	<div id="music2"></div>
+
+<script src="http://connect.soundcloud.com/sdk.js" type="text/JavaScript"></script>
+<script type="text/JavaScript">
+
+	var greetings = ['Listen to some fucking ', 'Bet you never fucking heard this track by ', 'Your fucking ears will be graced by ', 'The fucking music gods have brought you ', 'Muh fucking Mozart is channeled through ', 'Your life was fucking incomplete without ', 'The music Gods have fucking brought you ', 'Bro, fucking listen to '];
+	
+	// SHOW GREETINGS
+	var allGreetings = greetings.length;
+	var whichGreeting = Math.floor(allGreetings * Math.random());
+	var listenTo = function () {
+		document.getElementById("listenToGreeting").innerHTML = greetings[whichGreeting];
+	};
+	
+	listenTo();
+	
+	// START SOUNDCLOUD SHIT
+	
+	var iframeElement   = document.querySelector('iframe');
+	var iframeElementID = iframeElement.id;
+	var widget1         = SC.Widget(iframeElement);
+	var widget2         = SC.Widget(iframeElementID);
+	// widget1 === widget2
+	
+	SC.initialize({
+		client_id: "7kIeyF5f2ETFo1fEWKwNQ",
+	});
+	
+	var track;
+	
+	var getTrackHot = function() {
+		SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
+			var results = tracks.length;
+			var random = Math.floor(results*Math.random());
+			console.log(random);
+			track = tracks[random];
+			var soundCloudUser = track.user.username;
+			var soundCloudUserUrl = track.user.permalink_url;
+			document.getElementById("username").innerHTML = (' ' + '<a href="' + soundCloudUserUrl + '">' +  soundCloudUser+ '</a>');
+			SC.oEmbed(track.uri, document.getElementById("music"));
+			document.getElementById("music2").innerHTML = ('<a href="'+ track.permalink_url + '" class="sc-player">Broken</a>');
+
+			var what = typeof SC.Widget.Events.READY;
+			});
+	};
+	
+	getTrackHot();
+
+</script>
+
+<script type="text/Javascript">
+		var loaded = function() {
+		if (SC.Widget.Events.READY !== "ready") {
+				document.getElementById("body").innerHTML = ('<div id="load"><img src="loading.gif"></div>');
+			//document.getElementById("container").style.z-index = 2000;
+		} else {
+			//document.getElementById("body").innerHTML = ('<div id="load"><img src="loading.gif"></div>');
+		}
+	};
+	
+	loaded();
+	
+	</script>
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="sc-player/js/soundcloud.player.api.js"></script>
+    <script type="text/javascript" src="sc-player/js/sc-player.js"></script>
+    
+</body>
+</html>
