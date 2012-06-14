@@ -8,7 +8,7 @@ body {
 	margin: 0;
 }
 
-#container {
+.container {
 	width: 80%;
 	margin: 0 auto;
 	top: 100px;
@@ -21,17 +21,7 @@ body {
 	transition:all 1.0s ease-in-out;
 }
 
-#panel {
-	margin-top: 150%;
-	position: absolute;
-}
-
-#header {
-	font-size: 2 em;
-	font-weight: bold;
-}
-
-#content {
+.content {
 	border-top: 10px solid #FF7700;
 }
 
@@ -47,17 +37,26 @@ body {
 	display: inline;
 }
 
-.user a:link, .user a:visited {
-	color: #000000;
+nav ul {
+    list-style: none;
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
 }
 
-.user a:hover {
-	text-decoration: none;
+nav li {
+    padding: 0;
+    display: inline;
 }
 
-#nav {
-	font-size: 2 em;
-	padding-top: 20px;
+#music {
+    padding: 12px 0;
+}
+
+#music img {
+    display: block;
+    margin: auto;
 }
 
 #somethingElse {
@@ -68,39 +67,4 @@ body {
 #somethingIndie {
 	float: right;
 	display: inline;
-}
-
-.navigate a:link, .navigate a:visited {
-	color: #000000;
-	text-decoration: none;
-}
-
-.navigate a:hover {
-	color: #000000;
-	text-decoration: underline;
-	}
-
-#load {
-	background: rgb(255, 228, 196);
-	background: rgba(255, 228, 196, 0.5);
-	filter: alpha(opacity=60);
-	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=30);
-   	opacity:0.6;
-   -moz-opacity: 0.30; 
-	background-size: cover;
-	position: absolute;
-	text-align:center;
-	height: 100%;
-	width: 100%;
-	z-index: 1000;
-}
-
-#load img {
-	margin-top: 100px;
-}
-
-#shareValue {
-	position: absolute;
-	top: 20px;
-	right: 10px;
 }
