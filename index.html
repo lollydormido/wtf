@@ -13,7 +13,7 @@
       <h1>What the fuck should I listen to?</h1>
     </header>
     <div class="content">
-      <h2><span class="listenToGreeting"></span> <span class="username" class="user"></span></h2>
+      <h2><span class="listenToGreeting"></span> <span class="username"><a href="#"></a></span></h2>
       <div class="music"><img src="images/ajax-loader.gif" alt="Loading..."></div>
     </div>
     <hr>
@@ -47,7 +47,6 @@
         SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
           var track = tracks[Math.floor(tracks.length*Math.random())];
           $(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
-          $(document.createElement("a")).prependTo(".username");
           var soundCloudUser = track.user.username;
           var soundCloudUserUrl = track.user.permalink_url;
           $(".username a").attr("href", soundCloudUserUrl).html(soundCloudUser);
