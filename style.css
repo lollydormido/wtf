@@ -1,70 +1,43 @@
 body {
-	font-family: "Arial", "Helvetica";
-	background-image: url('bg.jpg');
-	background-repeat: repeat;
-	font-size: 12px;
-	color: #000000;
-	padding: 0;
-	margin: 0;
+  background: transparent url('bg.jpg');
+  font-size: 12px;
+  color: #000000;
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2 {
+  font-family: "Arial", "Helvetica";
 }
 
 .container {
-	width: 80%;
-	margin: 0 auto;
-	top: 100px;
-	position: relative;
-	font-family: "Arial", "Helvetica";
-	-webkit-transition:all 1.0s ease-in-out;
-	-moz-transition:all 1.0s ease-in-out;
-	-o-transition:all 1.0s ease-in-out;
-	-ms-transition:all 1.0s ease-in-out;	
-	transition:all 1.0s ease-in-out;
+  width: 80%;
+  margin: 0 auto;
+  padding: 100px 0;
 }
 
 .content {
-	border-top: 10px solid #FF7700;
-}
-
-#listenToGreeting {
-	font-size: 5 em;
-	font-weight: bold;
-	display: inline;
-}
-
-#username {
-	font-size: 5 em;
-	font-weight: bold;
-	display: inline;
+  border-top: 10px solid #FF7700;
 }
 
 nav ul {
-    list-style: none;
-    list-style-type: none;
-    list-style-image: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  list-style-type: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
 }
 
 nav li {
-    padding: 0;
-    display: inline;
+  padding: 0;
+  display: inline;
 }
 
-#music {
-    padding: 12px 0;
+.music {
+  padding: 12px 0;
 }
 
-#music img {
-    display: block;
-    margin: auto;
-}
-
-#somethingElse {
-	float: left;
-	display: inline;
-}
-
-#somethingIndie {
-	float: right;
-	display: inline;
+.music img {
+  display: block;
+  margin: auto;
 }
