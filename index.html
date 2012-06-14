@@ -34,13 +34,12 @@
       var allGreetings = greetings.length;
       var whichGreeting = Math.floor(allGreetings * Math.random());
       $("#listenToGreeting").html(greetings[whichGreeting]);
-      
+      $(document.createElement("a")).prependTo("#username");
+      $(".next").button();
+
       SC.initialize({
         client_id: "7kIeyF5f2ETFo1fEWKwNQ",
       });
-
-      $(document.createElement("a")).prependTo("#username");
-      $(".next").button();
 
       function playTrack() {
         SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
@@ -61,6 +60,7 @@
       $(".next").click(function() {
         playTrack();
       });
+      // TODO: Catch SC oEmbed Player track done and playTrack again
     });
   </script>
 </body>
