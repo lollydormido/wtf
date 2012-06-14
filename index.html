@@ -38,11 +38,6 @@
         'The music Gods have fucking brought you',
         'Bro, fucking listen to'
       ];
-      // SHOW GREETINGS
-      $(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
-
-      $(document.createElement("a")).prependTo(".username");
-      $(".next").button();
 
       SC.initialize({
         client_id: "7kIeyF5f2ETFo1fEWKwNQ",
@@ -50,9 +45,9 @@
 
       function playTrack() {
         SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
-          var results = tracks.length;
-          var random = Math.floor(results*Math.random());
-          var track = tracks[random];
+          var track = tracks[Math.floor(tracks.length*Math.random())];
+          $(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
+          $(document.createElement("a")).prependTo(".username");
           var soundCloudUser = track.user.username;
           var soundCloudUserUrl = track.user.permalink_url;
           $(".username a").attr("href", soundCloudUserUrl).html(soundCloudUser);
@@ -62,11 +57,17 @@
         });
       }
 
+      // Play track on load
       playTrack();
 
+      // Style with jQuery UI http://jqueryui.com/demos/button/
+      $(".next").button();
+
+      // Assign an anonymous call back function to click event on .next button
       $(".next").click(function() {
         playTrack();
       });
+
       // TODO: Catch SC oEmbed Player track done and playTrack again
     });
   </script>
