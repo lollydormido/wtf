@@ -14,11 +14,10 @@ body {
 	top: 100px;
 	position: relative;
 	font-family: "Arial", "Helvetica";
-	font-size: 12px;
 }
 
 header {
-	font-size: 2 em;
+	font-size: 2em;
 	font-weight: bold;
 }
 
@@ -27,14 +26,14 @@ header {
 }
 
 .listenToGreeting {
-	font-size: 5 em;
+	font-size: 4em;
 	font-weight: bold;
 	display: inline;
 }
 
 
 .username {
-	font-size: 5 em;
+	font-size: 4em;
 	font-weight: bold;
 	display: inline;
 }
@@ -59,12 +58,15 @@ nav ul {
 	list-style: none;
 	list-style-type: none;
 	list-style-image: none;
-	margin: 0;
+	margin: 10;
 	padding: 0;
 }
 
 nav li {
 	display: inline;
+	border-radius: 10px;
+	background: aqua;
+	padding: 10px;
 }
 
 nav a:link, nav a:visited {
