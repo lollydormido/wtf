@@ -4,71 +4,99 @@
   <meta charset="utf-8">
   <title>What the fuck should I listen to?</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="sc-player/css/sc-player-minimal.css" type="text/css">
-  <link rel="stylesheet" href="css/smoothness/jquery-ui-1.8.21.custom.css" type="text/css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>What the fuck should I listen to?</h1>
-    </header>
-    <div class="content">
-      <h2><span class="listenToGreeting"></span> <span class="username"><a href="#"></a></span></h2>
-      <div class="music"><img src="images/ajax-loader.gif" alt="Loading..."></div>
-    </div>
-    <hr>
-    <nav>
-      <ul>
-        <li><a href="#" class="next">Play Next Track</a></li>
-      </ul>
-    </nav>
-  </div>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="//connect.soundcloud.com/sdk.js"></script>
-  <script type="text/javascript">
-    $(function() {
-      var greetings = [
-        'Listen to some fucking',
-        'Bet you never fucking heard this track by',
-        'Your fucking ears will be graced by',
-        'The fucking music gods have brought you',
-        'Muh fucking Mozart is channeled through',
-        'Your life was fucking incomplete without',
-        'The music Gods have fucking brought you',
-        'Bro, fucking listen to'
-      ];
+	<div id="container">
+		<header>
+			What the fuck should I listen to?
+		</header>
+		        
+		<div id="content">
+			<span class="listenToGreeting"></span>
+			<span class="username"><a href="#"></a></span>
+		</div>
+		
+		<div class="music">
+			<img src="loading.gif" alt="Loading..."></div>
 
-      SC.initialize({
-        client_id: "7kIeyF5f2ETFo1fEWKwNQ",
-      });
+		<nav>
+			<ul>
+				<li>
+					<a href="#" class="next">Next fucking track</a>
+				</li>
+			</ul>
+		</nav>
+		
+	</div>
 
-      function playTrack() {
-        SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
-          var track = tracks[Math.floor(tracks.length*Math.random())];
-          $(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
-          var soundCloudUser = track.user.username;
-          var soundCloudUserUrl = track.user.permalink_url;
-          $(".username a").attr("href", soundCloudUserUrl).html(soundCloudUser);
-          // SC Playing http://developers.soundcloud.com/docs/api/guide#playing 
-          // SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
-          SC.oEmbed(track.uri, {show_comments: false, auto_play: true},  $(".music")[0]);
-        });
-      }
-
-      // Play track on load
-      playTrack();
-
-      // Style with jQuery UI http://jqueryui.com/demos/button/
-      $(".next").button();
-
-      // Assign an anonymous call back function to click event on .next button
-      $(".next").click(function() {
-        playTrack();
-      });
-
-      // TODO: Catch SC oEmbed Player track done and playTrack again
-    });
-  </script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<script src="http://connect.soundcloud.com/sdk.js" type="text/JavaScript"></script>
+<script src="http://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+<script type="text/JavaScript">
+	
+	$(function() {
+		var greetings = [
+			'Listen to some fucking ',
+			'Bet you never fucking heard ',
+			'Your fucking ears will be graced by ',
+			'The fucking Music Gods have brought you ',
+			'Muh fucking Mozart is challened through ',
+			'Your life was fucking incomplete without ',
+			'Bro, fucking listen to ',
+		];
+		
+		SC.initialize({
+			client_id: "7kIeyF5f2ETFo1fEWKwNQ",
+		});
+		
+		function playTrack() {
+			SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
+				track = tracks[Math.floor(tracks.length*Math.random())];
+				$(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
+				var soundCloudUser = track.user.username;
+				var soundCloudUserUrl = track.user.permalink_url;
+				$(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
+				// SC Playing http://developers.soundcloud.com/docs/api/guide#playing 
+          		// SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
+          		SC.oEmbed(track.uri, {show_comments: false, sharing: false, auto_play: true}, function(oembed) {
+          			// Embed iframe
+          			$(".music").html(oembed.html);
+          			
+          			// When iframe loads, this function goes
+          			$("iframe").load( function() {
+          				console.log("SHIT!");
+          				var iframeElement = document.querySelector("iframe");
+          				var widget = SC.Widget(iframeElement);
+          				
+          				//This function re-loads track at the end of each one
+          				widget.bind(SC.Widget.Events.READY, function() {
+          					widget.bind(SC.Widget.Events.FINISH, function() {
+          					});
+          				});		
+          			});     			
+          		});
+			});	
+		}
+				
+		// Play track on load
+		playTrack();
+		
+		//Style with jQuery UI http://jqueryui.com/demos/button/
+		$(".next").button();
+		
+		// Assign an anonymous call back function to click event on .next button
+      	$(".next").click(function() {
+        	playTrack();
+      	});
+      	
+      	// Next: playTrack() again when track is done playing
+		widget.bind(SC.Widget.Events.FINISH, function() {
+			playTrack();
+		})
+		// http://developers.soundcloud.com/docs/api/html5-widget#methods
+	});
+</script>
+    
 </body>
 </html>
