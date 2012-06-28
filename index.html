@@ -83,6 +83,7 @@
       	});
       	
       	// Next: playTrack() again when track is done playing
+		// http://developers.soundcloud.com/docs/api/html5-widget#methods
 		function thisIsTest() {
 			console.log("This is a test");
 			var iframeElement = document.querySelector("iframe");
@@ -91,14 +92,17 @@
 			widget.bind(SC.Widget.Events.READY, function() {
 				widget.bind(SC.Widget.Events.FINISH, function() {
 					playTrack();
-				})
-			
-			return false;
-			
-			})
+				});
+				// unbind
+				widget.unbind(SC.Widget.Events.FINISH);
+			});
+			// unbind 
+			widget.unbind(SC.Widget.Events.READY);
 		};
 		// http://developers.soundcloud.com/docs/api/html5-widget#methods
+	
 	});
+
 </script>
     
 </body>
