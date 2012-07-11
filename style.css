@@ -33,16 +33,16 @@ header {
 
 
 .username {
-	font-size: 4em;
+	font-size: 2em;
 	font-weight: bold;
 	display: inline;
 }
 
-.user a:link, .user a:visited {
+.username a:link, .user a:visited {
 	color: #000000;
 }
 
-.user a:hover {
+.username a:hover {
 	text-decoration: none;
 }
 
@@ -73,3 +73,4 @@ nav a:link, nav a:visited {
 	color: #000000;
 	text-decoration: none;
 }
+

@@ -16,11 +16,49 @@
     </div>
     <div class="music"><img src="loading.gif" alt="Loading..."></div>
     <nav>
-      <ul>
-        <li>
-          <a href="#" class="next">Next fucking track</a>
-        </li>
-      </ul>
+<ul>
+<li>
+  <a href="#" class="next">Next fucking track</a>
+</li>
+</ul>
+
+
+<form name="chooseTag">
+	<label>Now Playing:</label>
+	<select id="selectATag">
+		<option value="HotTracks">Hot Tracks</option>
+		<option value="2012">2012</option>
+		<option value="Acoustic">Acoustic</option>
+		<option value="Bass">Bass</option>
+		<option value="Beat">Beat</option>
+		<option value="Cover">Cover</option>
+		<option value="Dance">Dance</option>
+		<option value="Deep">Deep</option>
+		<option value="Dj">Dj</option>
+		<option value="Drum">Drum</option>
+		<option value="Drum%20&amp;%20Bass">Drum &amp; Bass</option>
+		<option value="Dubstep">Dubstep</option>
+		<option value="Electronic">Electronic</option>
+		<option value="Electronic%20House">Electronic House</option>
+		<option value="Funk">Funk</option>
+		<option value="Hip-hop%2Frap">Hip-hop/rap</option>
+		<option value="Hiphop">Hiphop</option>
+		<option value="House">House</option>
+		<option value="Instrumental">Instrumental</option>
+		<option value="Minimal">Minimal</option>
+		<option value="Mix">Mix</option>
+		<option value="Music">Music</option>
+		<option value="Original">Original</option>
+		<option value="Pop">Pop</option>
+		<option value="Progressive">Progressive</option>
+		<option value="Rap">Rap</option>
+		<option value="Remix">Remix</option>
+		<option value="Rock">Rock</option>
+		<option value="Techno">Techno</option>
+		<option value="Trance">Trance</option>
+	</select>
+</form>
+
     </nav>
   </div>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -46,45 +84,64 @@
         'Bro, fucking listen to '
       ];
 
+
       function getRandomTrack() {
-        return hot_tracks[Math.floor(hot_tracks.length*Math.random())];
+        this.randomTrack = hot_tracks[Math.floor(hot_tracks.length*Math.random())];
+	return randomTrack
       }
+
+      function getGreeting() {
+	$(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
+	var soundCloudUser = this.randomTrack.user.username;
+	var soundCloudUserUrl = this.randomTrack.user.permalink_url;
+	$(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
+	}
 
       function playNextTrack(widget) {
         widget.load(getRandomTrack().uri, {
-          auto_play: true
+          auto_play: true,
+	  sharing: false
         });
-      }
+	getGreeting();
+     }
+
+	 $("#selectATag").change(function() {
+		 aTag = $(this).val();
+		console.log(aTag);
+		SC.get("/tracks?filter=public&order=hotness&tags=" + aTag, {limit: 50}, function(tracks) {
+			hot_tracks = tracks;
+			play(getRandomTrack());
+			getGreeting();
+		});
+	});
 
       function play (track) {
         var currentTrack = null;
         // SC Playing http://developers.soundcloud.com/docs/api/guide#playing
         // SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
-        // $(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
-        // var soundCloudUser = track.user.username;
-        // var soundCloudUserUrl = track.user.permalink_url;
-        // $(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
-        SC.oEmbed(track.uri, {show_comments: false, sharing: false, auto_play: true}, function(oembed) {
+        SC.oEmbed(track.uri, {sharing: false, auto_play: true}, function(oembed) {
           // Embed iframe
           $(".music").html(oembed.html);
           // http://developers.soundcloud.com/docs/api/html5-widget#methods
-          widget = SC.Widget($(".music iframe")[0]);
+	  widget = SC.Widget($(".music iframe")[0]);
           widget.bind(SC.Widget.Events.READY, function (e) {
-            $(".next").click(function() {
-              playNextTrack(widget);
-            });
-            widget.bind(SC.Widget.Events.FINISH, function () {
-              playNextTrack(widget);
-            });
+		$(".next").click(function() {
+			playNextTrack(widget);	      
+		});
+		widget.bind(SC.Widget.Events.FINISH, function () {
+			playNextTrack(widget);
+		});
           });
         });
       }
 
-      SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
-        hot_tracks = tracks;
-        play(hot_tracks[0]);
-      });
-    });
+	SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
+		hot_tracks = tracks;
+		play(getRandomTrack());
+		getGreeting();
+	});
+  });
   </script>
 </body>
 </html>
+
