@@ -24,39 +24,39 @@
 
 
 <form name="chooseTag">
-	<label>Now Playing:</label>
-	<select id="selectATag">
-		<option value="HotTracks">Hot Tracks</option>
-		<option value="2012">2012</option>
-		<option value="Acoustic">Acoustic</option>
-		<option value="Bass">Bass</option>
-		<option value="Beat">Beat</option>
-		<option value="Cover">Cover</option>
-		<option value="Dance">Dance</option>
-		<option value="Deep">Deep</option>
-		<option value="Dj">Dj</option>
-		<option value="Drum">Drum</option>
-		<option value="Drum%20&amp;%20Bass">Drum &amp; Bass</option>
-		<option value="Dubstep">Dubstep</option>
-		<option value="Electronic">Electronic</option>
-		<option value="Electronic%20House">Electronic House</option>
-		<option value="Funk">Funk</option>
-		<option value="Hip-hop%2Frap">Hip-hop/rap</option>
-		<option value="Hiphop">Hiphop</option>
-		<option value="House">House</option>
-		<option value="Instrumental">Instrumental</option>
-		<option value="Minimal">Minimal</option>
-		<option value="Mix">Mix</option>
-		<option value="Music">Music</option>
-		<option value="Original">Original</option>
-		<option value="Pop">Pop</option>
-		<option value="Progressive">Progressive</option>
-		<option value="Rap">Rap</option>
-		<option value="Remix">Remix</option>
-		<option value="Rock">Rock</option>
-		<option value="Techno">Techno</option>
-		<option value="Trance">Trance</option>
-	</select>
+  <label>Now Playing:</label>
+  <select id="selectATag">
+    <option value="HotTracks">Hot Tracks</option>
+    <option value="2012">2012</option>
+    <option value="Acoustic">Acoustic</option>
+    <option value="Bass">Bass</option>
+    <option value="Beat">Beat</option>
+    <option value="Cover">Cover</option>
+    <option value="Dance">Dance</option>
+    <option value="Deep">Deep</option>
+    <option value="Dj">Dj</option>
+    <option value="Drum">Drum</option>
+    <option value="Drum%20&amp;%20Bass">Drum &amp; Bass</option>
+    <option value="Dubstep">Dubstep</option>
+    <option value="Electronic">Electronic</option>
+    <option value="Electronic%20House">Electronic House</option>
+    <option value="Funk">Funk</option>
+    <option value="Hip-hop%2Frap">Hip-hop/rap</option>
+    <option value="Hiphop">Hiphop</option>
+    <option value="House">House</option>
+    <option value="Instrumental">Instrumental</option>
+    <option value="Minimal">Minimal</option>
+    <option value="Mix">Mix</option>
+    <option value="Music">Music</option>
+    <option value="Original">Original</option>
+    <option value="Pop">Pop</option>
+    <option value="Progressive">Progressive</option>
+    <option value="Rap">Rap</option>
+    <option value="Remix">Remix</option>
+    <option value="Rock">Rock</option>
+    <option value="Techno">Techno</option>
+    <option value="Trance">Trance</option>
+  </select>
 </form>
 
     </nav>
@@ -86,7 +86,8 @@
 
 
 	function getRandomTrack() {
-		this.randomTrack = hot_tracks[Math.floor(hot_tracks.length*Math.random())];
+		console.log(containsAllUris["HotTracks"]);
+		this.randomTrack = containsAllUris["HotTracks"][Math.floor(containsAllUris["HotTracks"].length*Math.random())];
 		return randomTrack
 	      }
 
@@ -128,7 +129,7 @@
 		}	
 
 	//Create an empty array that contains all track uris
-	var containsAllUris = [];
+	var containsAllUris = {};
 	var countCheck = 0;
 	var tagCount = $("#selectATag option").length;
 
@@ -137,12 +138,12 @@
 		aTag = $(this).val();
 		SC.get("/tracks?filter=public&order=hotness&tags=" + aTag, {limit: 50}, function(tracks) {
 			containsAllUris[aTag] = tracks;
-			console.log(containsAllUris[aTag]);
+			console.log(tracks);
 			countCheck++;
-			if ( countCheck < 3 ) {
+			if ( countCheck < tagCount ) {
 				console.log(countCheck);
 				} 
-			else {	hot_tracks = containsAllUris["2012"];
+			else {
 				play(getRandomTrack());
 				getGreeting(); 
 				console.log("Done loading!");
