@@ -137,8 +137,9 @@
 		aTag = $(this).val();
 		SC.get("/tracks?filter=public&order=hotness&tags=" + aTag, {limit: 50}, function(tracks) {
 			containsAllUris[aTag] = tracks;
-			if ( countCheck < tagCount ) {
-			 	countCheck++;
+			console.log(containsAllUris[aTag]);
+			countCheck++;
+			if ( countCheck < 3 ) {
 				console.log(countCheck);
 				} 
 			else {	hot_tracks = containsAllUris["2012"];
@@ -150,7 +151,7 @@
 		});
 	
 	$("#selectATag").change( function() {
-		console.log("I changed!");	
+		console.log("I changed!");
 		});	
 	});
   </script>
