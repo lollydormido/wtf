@@ -85,62 +85,74 @@
       ];
 
 
-      function getRandomTrack() {
-        this.randomTrack = hot_tracks[Math.floor(hot_tracks.length*Math.random())];
-	return randomTrack
-      }
+	function getRandomTrack() {
+		this.randomTrack = hot_tracks[Math.floor(hot_tracks.length*Math.random())];
+		return randomTrack
+	      }
 
-      function getGreeting() {
-	$(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
-	var soundCloudUser = this.randomTrack.user.username;
-	var soundCloudUserUrl = this.randomTrack.user.permalink_url;
-	$(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
-	}
+	function getGreeting() {
+		$(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
+		var soundCloudUser = this.randomTrack.user.username;
+		var soundCloudUserUrl = this.randomTrack.user.permalink_url;
+		$(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
+		}
 
-      function playNextTrack(widget) {
-        widget.load(getRandomTrack().uri, {
-          auto_play: true,
-	  sharing: false
-        });
-	getGreeting();
-     }
-
-	 $("#selectATag").change(function() {
-		 aTag = $(this).val();
-		console.log(aTag);
-		SC.get("/tracks?filter=public&order=hotness&tags=" + aTag, {limit: 50}, function(tracks) {
-			hot_tracks = tracks;
-			play(getRandomTrack());
-			getGreeting();
-		});
-	});
-
-      function play (track) {
-        var currentTrack = null;
-        // SC Playing http://developers.soundcloud.com/docs/api/guide#playing
-        // SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
-        SC.oEmbed(track.uri, {sharing: false, auto_play: true}, function(oembed) {
-          // Embed iframe
-          $(".music").html(oembed.html);
-          // http://developers.soundcloud.com/docs/api/html5-widget#methods
-	  widget = SC.Widget($(".music iframe")[0]);
-          widget.bind(SC.Widget.Events.READY, function (e) {
-		$(".next").click(function() {
-			playNextTrack(widget);	      
-		});
-		widget.bind(SC.Widget.Events.FINISH, function () {
-			playNextTrack(widget);
-		});
-          });
-        });
-      }
-
-	SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
-		hot_tracks = tracks;
-		play(getRandomTrack());
+	function playNextTrack(widget) {
+		widget.load(getRandomTrack().uri, {
+			auto_play: true,
+			sharing: false
+			});
 		getGreeting();
+		}
+
+
+	function play(track) {
+		var currentTrack = null;
+		// SC Playing http://developers.soundcloud.com/docs/api/guide#playing
+		// SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
+	
+		SC.oEmbed(track.uri, {sharing: false, auto_play: true}, function(oembed) {
+			// Embed iframe
+			$(".music").html(oembed.html);
+			// http://developers.soundcloud.com/docs/api/html5-widget#methods
+			widget = SC.Widget($(".music iframe")[0]);
+			widget.bind(SC.Widget.Events.READY, function (e) {
+				$(".next").click(function() {
+					playNextTrack(widget);	      
+					});
+				widget.bind(SC.Widget.Events.FINISH, function () {
+					playNextTrack(widget);
+					});
+				});
+			});
+		}	
+
+	//Create an empty array that contains all track uris
+	var containsAllUris = [];
+	var countCheck = 0;
+	var tagCount = $("#selectATag option").length;
+
+	//For each dropdown value, pull 50 tracks
+	$("#selectATag option").each( function() {
+		aTag = $(this).val();
+		SC.get("/tracks?filter=public&order=hotness&tags=" + aTag, {limit: 50}, function(tracks) {
+			containsAllUris[aTag] = tracks;
+			if ( countCheck < tagCount ) {
+			 	countCheck++;
+				console.log(countCheck);
+				} 
+			else {	hot_tracks = containsAllUris["2012"];
+				play(getRandomTrack());
+				getGreeting(); 
+				console.log("Done loading!");
+				};
+			 });
+		});
+	
+	$("#selectATag").change( function() {
+		console.log("I changed!");	
+		});	
 	});
-  });
   </script>
 </body>
 </html>
