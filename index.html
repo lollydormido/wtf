@@ -85,9 +85,10 @@
       ];
 
 
-	function getRandomTrack() {
-		console.log(containsAllUris["HotTracks"]);
-		this.randomTrack = containsAllUris["HotTracks"][Math.floor(containsAllUris["HotTracks"].length*Math.random())];
+	function getRandomTrack(aTag) {
+		console.log(containsAllUris[aTag].length);
+		this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
+		this.whatTag = aTag;
 		return randomTrack
 	      }
 
@@ -99,9 +100,10 @@
 		}
 
 	function playNextTrack(widget) {
-		widget.load(getRandomTrack().uri, {
+		console.log(this.whatTag);
+		widget.load(getRandomTrack(this.whatTag).uri, {
 			auto_play: true,
-			sharing: false
+			sharing: false,
 			});
 		getGreeting();
 		}
@@ -112,7 +114,7 @@
 		// SC Playing http://developers.soundcloud.com/docs/api/guide#playing
 		// SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
 	
-		SC.oEmbed(track.uri, {sharing: false, auto_play: true}, function(oembed) {
+		SC.oEmbed(track.uri, {show_comments: false, sharing: false, auto_play: true}, function(oembed) {
 			// Embed iframe
 			$(".music").html(oembed.html);
 			// http://developers.soundcloud.com/docs/api/html5-widget#methods
@@ -133,25 +135,56 @@
 	var countCheck = 0;
 	var tagCount = $("#selectATag option").length;
 
-	//For each dropdown value, pull 50 tracks
-	$("#selectATag option").each( function() {
-		aTag = $(this).val();
-		SC.get("/tracks?filter=public&order=hotness&tags=" + aTag, {limit: 50}, function(tracks) {
-			containsAllUris[aTag] = tracks;
-			console.log(tracks);
-			countCheck++;
-			if ( countCheck < tagCount ) {
-				console.log(countCheck);
-				} 
-			else {
-				play(getRandomTrack());
-				getGreeting(); 
+
+	function getTrack(tag) {
+		if (tag === "HotTracks") { 
+			SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
+				console.log(tag);
+				containsAllUris[tag] = tracks;
+				counts();
+				});
+			} else {
+				SC.get("/tracks?filter=public&order=hotness&tags=" + tag, {limit: 50}, function(tracks) {
+					console.log(tag);
+					containsAllUris[tag] = tracks;
+					counts();
+					});
+				};
+		};
+
+	//This counts
+	function counts() {
+		countCheck++;
+		console.log(countCheck);
+		if ( countCheck < tagCount ) {
+			console.log(countCheck);
+			}	else {
+				play(getRandomTrack("HotTracks"));
+				getGreeting();
 				console.log("Done loading!");
 				};
-			 });
+		};
+
+	//For each dropdown value, pull 50 tracks
+	$("#selectATag option").each( function() {
+	//	if ( countCheck < tagCount ) {
+	//		console.log(countCheck);
+	//		}	else {
+	//			play(getRandomTrack("HotTracks"));
+	//			getGreeting();
+	//			console.log("Done loading!");
+	//			};
+		getTrack($(this).val());
 		});
-	
+
+	//Do this everytime you change tags	
 	$("#selectATag").change( function() {
+		widget.load(getRandomTrack($(this).val()).uri, {
+			auto_play: true,
+			sharing: false,
+			show_comments: false,
+			});
+		getGreeting();
 		console.log("I changed!");
 		});	
 	});
