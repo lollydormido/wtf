@@ -4,14 +4,22 @@
   <meta charset="utf-8">
   <title>What the fuck should I listen to?</title>
   <link rel="stylesheet" href="style.css">
+<!--http://www.google.com/webfonts/#UsePlace:use/Collection:Alfa+Slab+One|Kelly+Slab|Port+Lligat+Slab-->
+ <link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One|Kelly+Slab|Port+Lligat+Slab|Squada+One|Josefin+Sans:700italic|Megrim' rel='stylesheet' type='text/css'>
 </head>
 <body>
+
+<div class="player" id="player">
+	<img id="play" src="play.png" width="100" height="100" style="display:none;"/>
+	<img id="pause" src="pause.png" width="100" height="100" style="display:none;"/>
+</div>
+
   <div id="container">
     <header>
-      <h1>What the fuck should I listen to?</h1>
+      <h1>WTF.fm</h1>
     </header>
     <div id="content">
-      <span class="listenToGreeting">&nbsp;</span>
+      <span class="listenToGreeting">Loading...</span>
       <span class="username"><a href="#"></a></span>
     </div>
     <div class="music"><img src="loading.gif" alt="Loading..."></div>
@@ -19,13 +27,19 @@
 <ul>
 <li>
   <a href="#" class="next">Next fucking track</a>
+
 </li>
+<!--<li>
+  <a href="#" class="playButton" id="playButton">Play/Pause</a>
+</li>-->
 </ul>
+
 
 
 <form name="chooseTag">
   <label>Now Playing:</label>
-  <select id="selectATag">
+
+ <select id="selectATag">
     <option value="HotTracks">Hot Tracks</option>
     <option value="2012">2012</option>
     <option value="Acoustic">Acoustic</option>
@@ -79,14 +93,13 @@
         'Bet you never fucking heard ',
         'Your fucking ears will be graced by ',
         'The fucking Music Gods have brought you ',
-        'Muh fucking Mozart is challened through ',
+        'Muh fucking Mozart is chanelled through ',
         'Your life was fucking incomplete without ',
         'Bro, fucking listen to '
       ];
 
 
 	function getRandomTrack(aTag) {
-		console.log(containsAllUris[aTag].length);
 		this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
 		this.whatTag = aTag;
 		return randomTrack
@@ -100,7 +113,6 @@
 		}
 
 	function playNextTrack(widget) {
-		console.log(this.whatTag);
 		widget.load(getRandomTrack(this.whatTag).uri, {
 			auto_play: true,
 			sharing: false,
@@ -123,29 +135,59 @@
 				$(".next").click(function() {
 					playNextTrack(widget);	      
 					});
+		//		$(".playButton").click(function() {
+		//			widget.pause();
+		//			widget.bind(SC.Widget.Events.PAUSE, function() {
+		//				$("#playButton").attr("title","paused");
+		//				});
+		//			});
 				widget.bind(SC.Widget.Events.FINISH, function () {
 					playNextTrack(widget);
 					});
 				});
 			});
 		}	
+	
+	//PLAY/PAUSE ANIMATION and KEYBOARD/SPACEBAR STROKE
+//	$(document).keypress(function(e) {
+//		//If spacebar (32) is pressed, togglePlay and return false
+//		if ((e.which && e.which == 32) || (e.keyCode && e.keyCode == 32)) {  
+//			togglePlay();
+//			return false;  
+//		} else {  
+//			return true;  
+//			}  
+//		});
+//
+//	$('#playButton').click(function(){
+//		togglePlay();
+//		return false;
+//		});
+//
+//	function togglePlay(){
+//		var $elem = $('#player').children(':first');
+//			$elem.stop()
+//				 .show()
+//				 .animate({'marginTop':'-175px','marginLeft':'-175px','width':'350px','height':'350px','opacity':'0'},function() {
+//					$(this).css({'width':'100px','height':'100px','margin-left':'-50px','margin-top':'-50px','opacity':'1','display':'none'});
+//				 });	
+//			$elem.parent().append($elem);
+//		}
+
 
 	//Create an empty array that contains all track uris
 	var containsAllUris = {};
 	var countCheck = 0;
 	var tagCount = $("#selectATag option").length;
 
-
 	function getTrack(tag) {
 		if (tag === "HotTracks") { 
 			SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
-				console.log(tag);
 				containsAllUris[tag] = tracks;
 				counts();
 				});
 			} else {
 				SC.get("/tracks?filter=public&order=hotness&tags=" + tag, {limit: 50}, function(tracks) {
-					console.log(tag);
 					containsAllUris[tag] = tracks;
 					counts();
 					});
@@ -155,25 +197,15 @@
 	//This counts
 	function counts() {
 		countCheck++;
-		console.log(countCheck);
 		if ( countCheck < tagCount ) {
-			console.log(countCheck);
 			}	else {
 				play(getRandomTrack("HotTracks"));
 				getGreeting();
-				console.log("Done loading!");
 				};
 		};
 
 	//For each dropdown value, pull 50 tracks
 	$("#selectATag option").each( function() {
-	//	if ( countCheck < tagCount ) {
-	//		console.log(countCheck);
-	//		}	else {
-	//			play(getRandomTrack("HotTracks"));
-	//			getGreeting();
-	//			console.log("Done loading!");
-	//			};
 		getTrack($(this).val());
 		});
 
@@ -185,9 +217,9 @@
 			show_comments: false,
 			});
 		getGreeting();
-		console.log("I changed!");
 		});	
 	});
+
   </script>
 </body>
 </html>

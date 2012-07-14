@@ -8,6 +8,10 @@ body {
 	margin: 0;
 }
 
+a:link, a:visited {
+	color: #000;
+}
+
 #container {
 	width: 60%;
 	margin: 0 auto;
@@ -17,33 +21,49 @@ body {
 }
 
 header {
+	font-family: 'Alfa Slab One', cursive;
 	font-size: 2em;
-	font-weight: bold;
+	border-bottom: 10px solid #01A6BD;
+}
+
+header h1 {
+	margin: 0px;
 }
 
 #content {
-	border-top: 10px solid #FF7700;
+	font-size: 25px;
+	font-family: 'Port Lligat Slab', serif;
+	min-height: 50;
+	margin: 20px 0;
 }
 
 .listenToGreeting {
-	font-size: 2em;
 	font-weight: bold;
 	display: inline;
+	padding: 10px;
+	background-color: #000;
+	color: #FFF;
 }
 
 
 .username {
-	font-size: 2em;
 	font-weight: bold;
 	display: inline;
+	background-color: #FFF;
+	padding: 10px;
 }
 
-.username a:link, .user a:visited {
+.username:hover {
+	background-color: #E7E2EB;
+}
+
+.username a:link, .username a:visited {
 	color: #000000;
+	text-decoration: underline;
 }
 
-.username a:hover {
-	text-decoration: none;
+.music {
+	min-height: 169px;
 }
 
 .music img {
@@ -52,25 +72,67 @@ header {
 	height: 100px;
 }
 
-
+nav {
+	margin: 20px 0;
+	font-family: 'Port Lligat Slab', serif;
+}
 nav ul {
+	display: inline;
 	font-size: 2 em;
 	list-style: none;
 	list-style-type: none;
 	list-style-image: none;
-	margin: 10;
+	margin: 0px;
 	padding: 0;
 }
 
 nav li {
 	display: inline;
-	border-radius: 10px;
-	background: aqua;
+	font-size: 16px;
+	font-weight: bold;
+	text-transform: uppercase;
+	background: black;
 	padding: 10px;
 }
 
-nav a:link, nav a:visited {
-	color: #000000;
+nav a, nav a:visited {
+	color: #FFF;
 	text-decoration: none;
 }
 
+select {
+	background: transparent;
+	padding: 5px;
+	height: 34px;
+	font-size: 16px;
+	border: 1px solid #CCC;
+}
+
+form {
+	display: inline;
+	padding: 0px;
+	margin: 0 0 0 283px;
+	font-size: 16px;
+}
+
+form label {
+	text-transform: uppercase;
+	background-color: #000;
+	color: #FFF;
+	padding: 10px;
+}
+
+.dropDown {
+	width: 240px;
+	height: 34px;
+	overflow: hidden;
+	background: url('dropdownarrow.jpeg') no-repeat right #DDD;
+}
+
+.player img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top:-50px;
+	margin-left:-50px;
+}
