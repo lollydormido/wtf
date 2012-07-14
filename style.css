@@ -9,13 +9,13 @@ body {
 }
 
 a:link, a:visited {
-	color: #000;
+	text-decoration: none;
 }
 
 #container {
-	width: 60%;
+	width: 762px;
 	margin: 0 auto;
-	top: 100px;
+	top: 125px;
 	position: relative;
 	font-family: "Arial", "Helvetica";
 }
@@ -170,4 +170,8 @@ footer a:link, footer a:visited {
 	color: #FF6798;
 	font-family: 'Megrim', cursive;
 	text-decoration: none;
+}
+
+#sharing {
+	position: relative;
 }
