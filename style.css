@@ -24,12 +24,18 @@ header {
 	font-family: 'Alfa Slab One', cursive;
 	font-size: 2em;
 	border-bottom: 10px solid #01A6BD;
+	text-shadow: 5px 5px 1px #DDDCDC;
 }
 
 header h1 {
 	margin: 0px;
 }
 
+header a:link, header a:visited, header a:hover {
+	display:block;
+	color: #000;
+	text-decoration: none;
+}
 #content {
 	font-size: 25px;
 	font-family: 'Port Lligat Slab', serif;
@@ -43,6 +49,7 @@ header h1 {
 	padding: 10px;
 	background-color: #000;
 	color: #FFF;
+	box-shadow: 5px 5px 1px #DDDCDC;
 }
 
 
@@ -51,10 +58,11 @@ header h1 {
 	display: inline;
 	background-color: #FFF;
 	padding: 10px;
+	box-shadow: 5px 5px 1px #DDDCDC;
 }
 
 .username:hover {
-	background-color: #E7E2EB;
+	background-image: -webkit-linear-gradient(top, #F7F7F7 0%, white 100%);
 }
 
 .username a:link, .username a:visited {
@@ -93,6 +101,12 @@ nav li {
 	text-transform: uppercase;
 	background: black;
 	padding: 10px;
+	box-shadow: 5px 5px 1px #DDDCDC;
+}
+
+nav li:hover {
+	text-shadow: -1px -3px 2px #313238;
+	background-image: -webkit-linear-gradient(top, #313238 0%, black 100%);
 }
 
 nav a, nav a:visited {
@@ -111,7 +125,7 @@ select {
 form {
 	display: inline;
 	padding: 0px;
-	margin: 0 0 0 283px;
+	margin: 0 0 0 280px;
 	font-size: 16px;
 }
 
@@ -135,4 +149,25 @@ form label {
 	left: 50%;
 	margin-top:-50px;
 	margin-left:-50px;
+}
+
+footer {
+	position: absolute;
+	right: -48px;
+	top: 222px;
+	text-align: center;
+	padding: 10px;
+	background-color: #000;
+	color: #FFF;
+	font-size: 15px;
+	transform-origin: 0% 0%;
+	-webkit-transform: rotate(90deg);
+	font-family: 'Port Lligat Slab', serif;
+	
+}
+
+footer a:link, footer a:visited {
+	color: #FF6798;
+	font-family: 'Megrim', cursive;
+	text-decoration: none;
 }
