@@ -21,6 +21,7 @@ a:link, a:visited {
 }
 
 header {
+	position: relative;
 	font-family: 'Alfa Slab One', cursive;
 	font-size: 2em;
 	border-bottom: 10px solid #01A6BD;
@@ -37,6 +38,7 @@ header a:link, header a:visited, header a:hover {
 	text-decoration: none;
 }
 #content {
+	position: relative;
 	font-size: 25px;
 	font-family: 'Port Lligat Slab', serif;
 	min-height: 50;
@@ -55,6 +57,7 @@ header a:link, header a:visited, header a:hover {
 
 .username {
 	font-weight: bold;
+	visibility: hidden; 
 	display: inline;
 	background-color: #FFF;
 	padding: 10px;
@@ -71,6 +74,7 @@ header a:link, header a:visited, header a:hover {
 }
 
 .music {
+	position: relative;
 	min-height: 169px;
 }
 
@@ -81,9 +85,13 @@ header a:link, header a:visited, header a:hover {
 }
 
 nav {
+	position: relative;
 	margin: 20px 0;
+	height: 20px;
 	font-family: 'Port Lligat Slab', serif;
+	visibility: hidden;
 }
+
 nav ul {
 	display: inline;
 	font-size: 2 em;
@@ -101,6 +109,7 @@ nav li {
 	text-transform: uppercase;
 	background: black;
 	padding: 10px;
+	margin: 0 10px 0 0;
 	box-shadow: 5px 5px 1px #DDDCDC;
 }
 
@@ -123,9 +132,12 @@ select {
 }
 
 form {
+	position: absolute;
+	top: -8px;
+	right: 0px;
 	display: inline;
 	padding: 0px;
-	margin: 0 0 0 280px;
+	margin: 0 0 0 212px;
 	font-size: 16px;
 }
 
@@ -149,29 +161,41 @@ form label {
 	left: 50%;
 	margin-top:-50px;
 	margin-left:-50px;
+	z-index: 999;
 }
 
 footer {
-	position: absolute;
-	right: -48px;
-	top: 222px;
-	text-align: center;
-	padding: 10px;
+	position: relative;
+	margin-top: 10px;
+	border-top: 10px solid #01A6BD;
 	background-color: #000;
 	color: #FFF;
 	font-size: 15px;
-	transform-origin: 0% 0%;
-	-webkit-transform: rotate(90deg);
-	font-family: 'Port Lligat Slab', serif;
-	
+	font-family: 'Alfa Slab One', cursive;
 }
 
-footer a:link, footer a:visited {
+footer a:link.jiggabitsLink, footer a:visited.jiggabitsLink {
 	color: #FF6798;
 	font-family: 'Megrim', cursive;
 	text-decoration: none;
 }
 
+footer a:link.butchershopLink, footer a:visited.butchershopLink {
+	color: red;
+	text-decoration: none;
+}
+
 #sharing {
-	position: relative;
+	position: absolute;
+	padding: 10px 0;
+}
+
+footer #credits {
+	position: absolute;
+	padding: 10px;
+	width: 150px;
+	background-color: #000;
+	color: #FFF;
+	box-shadow: 5px 5px 1px #DDDCDC;
+	left: 473px;
 }

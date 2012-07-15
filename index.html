@@ -32,7 +32,7 @@
       <h1><a href="/">WTF.fm</a></h1>
     </header>
     <div id="content">
-      <span class="listenToGreeting">Patience is a fucking virtue...</span>
+      <span class="listenToGreeting">Loading them tracks...</span>
       <span class="username"><a href="#"></a></span>
     </div>
     <div class="music"><img src="loading.gif" alt="Loading..."></div>
@@ -42,9 +42,9 @@
   <a href="#" class="next">Next fucking track</a>
 
 </li>
-<!--<li>
-  <a href="#" class="playButton" id="playButton">Play/Pause</a>
-</li>-->
+<li>
+  <a href="#" class="playButton" id="playButton">&nbsp;▐▐ &nbsp;</a>
+</li>
 </ul>
 
 
@@ -88,18 +88,19 @@
 
     </nav>
 
+<footer>
 <div id="sharing">
 	<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wtf.fm" data-text="What the fuck should you listen to? WTF.fm" data-via="jiggabits" data-hashtags="WTFfm">Tweet</a><BR>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 <div class="fb-like" data-href="http://wtf.fm" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
-
 </div>
 
-  </div>
-<footer>
-	Made by <a href="http://soundcloud.com/jiggabits">jiggabits</a>
+<div id="credits">	Made by <a class="jiggabitsLink" href="http://soundcloud.com/jiggabits">jiggabits</a><br> &amp; <a class="butchershopLink" href="http://butchershopcreative.com/">Butchershop</a></div>
 </footer>
+  </div>
+
+
 
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
@@ -158,15 +159,12 @@
 			// http://developers.soundcloud.com/docs/api/html5-widget#methods
 			widget = SC.Widget($(".music iframe")[0]);
 			widget.bind(SC.Widget.Events.READY, function (e) {
+				$(".username").css("visibility", "visible");
+				$("nav").css("visibility", "visible");
 				$(".next").click(function() {
 					playNextTrack(widget);	      
 					});
-		//		$(".playButton").click(function() {
-		//			widget.pause();
-		//			widget.bind(SC.Widget.Events.PAUSE, function() {
-		//				$("#playButton").attr("title","paused");
-		//				});
-		//			});
+				playPause();
 				widget.bind(SC.Widget.Events.FINISH, function () {
 					playNextTrack(widget);
 					});
@@ -175,30 +173,39 @@
 		}	
 	
 	//PLAY/PAUSE ANIMATION and KEYBOARD/SPACEBAR STROKE
-//	$(document).keypress(function(e) {
-//		//If spacebar (32) is pressed, togglePlay and return false
-//		if ((e.which && e.which == 32) || (e.keyCode && e.keyCode == 32)) {  
-//			togglePlay();
-//			return false;  
-//		} else {  
-//			return true;  
-//			}  
-//		});
-//
-//	$('#playButton').click(function(){
-//		togglePlay();
-//		return false;
-//		});
-//
-//	function togglePlay(){
-//		var $elem = $('#player').children(':first');
-//			$elem.stop()
-//				 .show()
-//				 .animate({'marginTop':'-175px','marginLeft':'-175px','width':'350px','height':'350px','opacity':'0'},function() {
-//					$(this).css({'width':'100px','height':'100px','margin-left':'-50px','margin-top':'-50px','opacity':'1','display':'none'});
-//				 });	
-//			$elem.parent().append($elem);
-//		}
+	function playPause() {
+		$(document).keypress(function(e) {
+			//If spacebar (32) is pressed, togglePlay and return false
+			if ((e.which && e.which == 32) || (e.keyCode && e.keyCode == 32)) {  
+				togglePlay();
+				return false;  
+			} else {  
+				return true;  
+				}  
+			});
+
+		$('#playButton').click(function(){
+			togglePlay();
+			return false;
+			});
+
+		function togglePlay(){
+			var $elem = $('#player').children(':first');
+				$elem.stop()
+					 .show()
+					 .animate({'marginTop':'-175px','marginLeft':'-175px','width':'350px','height':'350px','opacity':'0'},function() {
+						$(this).css({'width':'100px','height':'100px','margin-left':'-50px','margin-top':'-50px','opacity':'1','display':'none'});
+					 });	
+				$elem.parent().append($elem);
+				console.log($("#player").children(":first").attr("id"));
+			if ( $("#player").children(":first").attr("id") == "pause" ) {
+				widget.pause();
+				$("#playButton").html("&nbsp;►&nbsp;");
+				} else { widget.play();
+					 $("#playButton").html("&nbsp;▐▐ &nbsp;");
+					};
+			};
+		};
 
 
 	//Create an empty array that contains all track uris
