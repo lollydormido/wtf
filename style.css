@@ -1,6 +1,6 @@
 body {
 	font-family: "Arial", "Helvetica";
-	background-image: url('bg.jpg');
+	background-image: url('images/bg.jpg');
 	background-repeat: repeat;
 	font-size: 12px;
 	color: #000000;
@@ -146,13 +146,6 @@ form label {
 	background-color: #000;
 	color: #FFF;
 	padding: 10px;
-}
-
-.dropDown {
-	width: 240px;
-	height: 34px;
-	overflow: hidden;
-	background: url('dropdownarrow.jpeg') no-repeat right #DDD;
 }
 
 .player img {
