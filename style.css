@@ -169,7 +169,6 @@ footer {
 
 footer a:link.jiggabitsLink, footer a:visited.jiggabitsLink {
 	color: #FF6798;
-	font-family: 'Megrim', cursive;
 	text-decoration: none;
 }
 
@@ -179,16 +178,17 @@ footer a:link.butchershopLink, footer a:visited.butchershopLink {
 }
 
 #sharing {
-	position: absolute;
+	position: relative;
 	padding: 10px 0;
+	float: left;
 }
 
 footer #credits {
-	position: absolute;
+	position: relative;
 	padding: 10px;
-	width: 150px;
 	background-color: #000;
 	color: #FFF;
 	box-shadow: 5px 5px 1px #DDDCDC;
-	left: 473px;
+	text-align: right;
+	float: right;
 }
