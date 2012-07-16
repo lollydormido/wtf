@@ -164,7 +164,8 @@ footer {
 	background-color: #000;
 	color: #FFF;
 	font-size: 15px;
-	font-family: 'Alfa Slab One', cursive;
+	font-family: 'Port Lligat Slab', serif;
+	font-weight: 700;
 }
 
 footer a:link.jiggabitsLink, footer a:visited.jiggabitsLink {
