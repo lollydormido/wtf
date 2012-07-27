@@ -24,8 +24,62 @@
 
 </div>
 
-<script type="text/JavaScript">
-	var greetings = ['Listen to some fucking ', 'Bet you never fucking heard this track by ', 'Your fucking ears will be graced by ', 'The fucking music gods have brought you ', 'Muh fucking Mozart is channeled through ', 'Your life was fucking incomplete without ', 'The music Gods have fucking brought you '];
+<div id="credits">	Made by <a class="jiggabitsLink" href="http://soundcloud.com/jiggabits">jiggabits</a>  &amp; <a class="butchershopLink" href="http://butchershopcreative.com/">Butchershop Creative</a></div>
+</footer>
+  </div>
+
+
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
+  <script type="text/javascript" src="http://w.soundcloud.com/player/api.js"></script>
+  <script type="text/javascript">
+    $(function() {
+
+      SC.initialize({
+          client_id: "7kIeyF5f2ETFo1fEWKwNQ"
+      });
+
+      var hot_tracks, widget;
+
+      var greetings = [
+        'Listen to some fucking ',
+        'Bet you never fucking heard ',
+        'Your fucking ears will be graced by ',
+        'The fucking Music Gods have brought you ',
+        'Muh fucking Mozart is chanelled through ',
+        'Your life was fucking incomplete without ',
+        'Bro, fucking listen to '
+      ];
+
+
+	function getRandomTrack(aTag) {
+		this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
+		this.whatTag = aTag;
+		return randomTrack
+	      }
+
+	function getGreeting() {
+		$(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
+		var soundCloudUser = this.randomTrack.user.username;
+		var soundCloudUserUrl = this.randomTrack.user.permalink_url;
+		$(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
+		}
+
+	function playNextTrack(widget) {
+		widget.load(getRandomTrack(this.whatTag).uri, {
+			auto_play: true,
+			sharing: false,
+			});
+		getGreeting();
+		}
+
+
+	function play(track) {
+		var currentTrack = null;
+		// SC Playing http://developers.soundcloud.com/docs/api/guide#playing
+		// SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
 	
 	var allGreetings = greetings.length;
 	var whichGreeting = Math.floor(allGreetings * Math.random());
