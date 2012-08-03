@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src="modernizr.js">
+  </script>
+</head>
+<body>
+
+<div id="bar">
+	Hi!
+</div>
+
+<script type="text/javascript">
+	var foo = localStorage["bar"];
+	localStorage["bar"] = foo;;
+	console.log(foo);
+</script>
+</body>
+</html>

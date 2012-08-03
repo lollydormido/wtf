@@ -27,7 +27,6 @@
 	</script>
 </head>
 <body>
-  <h1>Local Storage</h1>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -119,11 +118,12 @@
   </div>
 
 
-
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
   <script type="text/javascript" src="http://w.soundcloud.com/player/api.js"></script>
+  <script type="text/javascript" src="underscore.js"></script>
+  <script type="text/javascript" src="backbone.js"></script>
   <script type="text/javascript">
     $(function() {
 
@@ -269,9 +269,69 @@
 			});
 		getGreeting();
 		});	
+
+	var NewTracks = Backbone.Model.Extend({
+
+		tagMenu: function() {
+			$('#selectATag option').each( function() {
+				getTrack($(this).val());
+			})
+		},
+
+		tagsTracks: function(tag) {						//
+			if (tag === "HotTracks") { 
+				SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
+					containsAllUris[tag] = tracks;
+					counts();
+					});
+				} else {
+					SC.get("/tracks?filter=public&order=hotness&tags=" + tag, {limit: 50}, function(tracks) {
+						containsAllUris[tag] = tracks;
+						counts();
+						});
+					};
+			};
+
+		},
+
+		tagCount: function() {							//Counts & makes sure all tags have tracks
+			countCheck++;
+			if ( countCheck < tagCount ) {
+				}	else {
+					play(getRandomTrack("HotTracks"));
+					getGreeting();
+					};
+			},
+
+	})
+
+	var comeBack = Backbone.Router.extend ({
+
+		routes: {
+			"track/:trackID": 		"track", 			//#track/ID
+			"genre/:tag": 			"genre", 			//#genre
+		},
+
+		track: function(trackID) {
+			console.log("Awesome TRACK dude.");
+			return trackID								//returns trackID to the SoundCloud player
+		},
+
+		genre: function(tag) {
+			console.log("Awesome GENRE dude.");
+			getTrack(tag); 								//retrieves tracks for this tag and plays one from this tag
+			$('#selectATag option').val(tag).attr('selected','selected');	//Also makes the tag currently selected in dropdown
+		},
 	});
 
-  </script>
+	localStorage.setItem("name", "Hello World!");
+	console.log(localStorage.getItem("name"));
+
+	Backbone.history.start();
+
+});
+
+</script>
 </body>
 </html>
 
