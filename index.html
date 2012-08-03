@@ -1,277 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	  <meta charset="utf-8">
-	  <title>⍾ wtf.fm | the best fucking way to find new music</title>
-	 <link rel="img_src" href="http://wtf.fm/images/screenshot.png" />
-	 <meta property="og:image" content="http://wtf.fm/images/screenshot.png" />
-	 <meta property="og:title" content="⍾ wtf.fm | the best fucking way to find new music" />
-	 <meta property="og:url" content="http://wtf.fm" /> 
-	 <link rel="stylesheet" href="style.css">
-	<!--http://www.google.com/webfonts/#UsePlace:use/Collection:Alfa+Slab+One|Kelly+Slab|Port+Lligat+Slab-->
-	 <link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One|Port+Lligat+Slab' rel='stylesheet' type='text/css'>
-
-
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-33400573-1']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
+  <meta charset="utf-8">
+  <title>&#9086; wtf.fm | the best fucking way to find new music</title>
+  <meta property="og:image" content="http://wtf.fm/images/screenshot.png">
+  <meta property="og:title" content="&#9086; wtf.fm | the best fucking way to find new music">
+  <meta property="og:url" content="http://wtf.fm">
+  <link rel="img_src" href="http://wtf.fm/images/screenshot.png">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!--http://www.google.com/webfonts/#UsePlace:use/Collection:Alfa+Slab+One|Kelly+Slab|Port+Lligat+Slab-->
+  <link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One|Port+Lligat+Slab' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=252090111493728";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<div class="player" id="player">
-	<img id="play" src="images/play.png" width="100" height="100" style="display:none;"/>
-	<img id="pause" src="images/pause.png" width="100" height="100" style="display:none;"/>
-</div>
-
-  <div id="container">
-    <header>
-      <h1><a href="/">WTF.fm</a></h1>
-    </header>
-    <div id="content">
+  <div class="player" id="player">
+    <img id="play" src="images/play.png" width="100" height="100" style="display:none;"/>
+    <img id="pause" src="images/pause.png" width="100" height="100" style="display:none;"/>
+  </div>
+  <div class="container">
+    <header><h1><a href="/">WTF.fm</a></h1></header>
+    <div class="content">
       <span class="listenToGreeting">Loading them tracks...</span>
       <span class="username"><a href="#"></a></span>
     </div>
     <div class="music"><img src="images/loading.gif" alt="Loading..."></div>
     <nav>
-<ul>
-<li>
-  <a href="#" class="next">Next fucking track</a>
-
-</li>
-<li>
-  <a href="#" class="playButton" id="playButton">&nbsp;▐▐ &nbsp;</a>
-</li>
-</ul>
-
-
-
-<form name="chooseTag">
-  <label>Now Playing:</label>
-
- <select id="selectATag">
-    <option value="HotTracks">Hot Tracks</option>
-    <option value="2012">2012</option>
-    <option value="Acoustic">Acoustic</option>
-    <option value="Bass">Bass</option>
-    <option value="Beat">Beat</option>
-    <option value="Cover">Cover</option>
-    <option value="Dance">Dance</option>
-    <option value="Deep">Deep</option>
-    <option value="Dj">Dj</option>
-    <option value="Drum">Drum</option>
-    <option value="Drum%20&amp;%20Bass">Drum &amp; Bass</option>
-    <option value="Dubstep">Dubstep</option>
-    <option value="Electronic">Electronic</option>
-    <option value="Electronic%20House">Electronic House</option>
-    <option value="Funk">Funk</option>
-    <option value="Hip-hop%2Frap">Hip-hop/rap</option>
-    <option value="Hiphop">Hiphop</option>
-    <option value="House">House</option>
-    <option value="Instrumental">Instrumental</option>
-    <option value="Minimal">Minimal</option>
-    <option value="Mix">Mix</option>
-    <option value="Music">Music</option>
-    <option value="Original">Original</option>
-    <option value="Pop">Pop</option>
-    <option value="Progressive">Progressive</option>
-    <option value="Rap">Rap</option>
-    <option value="Remix">Remix</option>
-    <option value="Rock">Rock</option>
-    <option value="Techno">Techno</option>
-    <option value="Trance">Trance</option>
-  </select>
-</form>
-
+      <ul>
+        <li><a href="#" class="next">Next fucking track</a></li>
+        <li><a href="#" class="playButton" id="playButton">&nbsp;&#9616;&#9616;&nbsp;</a></li>
+      </ul>
+      <form name="chooseTag">
+        <label>Now Playing:</label>
+        <select id="selectATag">
+          <option value="HotTracks">Hot Tracks</option>
+          <option value="2012">2012</option>
+          <option value="Acoustic">Acoustic</option>
+          <option value="Bass">Bass</option>
+          <option value="Beat">Beat</option>
+          <option value="Cover">Cover</option>
+          <option value="Dance">Dance</option>
+          <option value="Deep">Deep</option>
+          <option value="Dj">Dj</option>
+          <option value="Drum">Drum</option>
+          <option value="Drum%20&amp;%20Bass">Drum &amp; Bass</option>
+          <option value="Dubstep">Dubstep</option>
+          <option value="Electronic">Electronic</option>
+          <option value="Electronic%20House">Electronic House</option>
+          <option value="Funk">Funk</option>
+          <option value="Hip-hop%2Frap">Hip-hop/rap</option>
+          <option value="Hiphop">Hiphop</option>
+          <option value="House">House</option>
+          <option value="Instrumental">Instrumental</option>
+          <option value="Minimal">Minimal</option>
+          <option value="Mix">Mix</option>
+          <option value="Music">Music</option>
+          <option value="Original">Original</option>
+          <option value="Pop">Pop</option>
+          <option value="Progressive">Progressive</option>
+          <option value="Rap">Rap</option>
+          <option value="Remix">Remix</option>
+          <option value="Rock">Rock</option>
+          <option value="Techno">Techno</option>
+          <option value="Trance">Trance</option>
+        </select>
+      </form>
     </nav>
-
-<footer>
-<div id="sharing">
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wtf.fm" data-text="⍾ wtf.fm | the best fucking way to find new music via @jiggabits + @butchershopsf" data-hashtags="WTFfm">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-<BR>
-
-<div class="fb-like" data-href="http://wtf.fm" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
-</div>
-
-<div id="credits">	Made by <a class="jiggabitsLink" href="http://soundcloud.com/jiggabits">jiggabits</a>  &amp; <a class="butchershopLink" href="http://butchershopcreative.com/">Butchershop Creative</a></div>
-</footer>
+    <footer>
+      <div class="sharing">
+        <!--
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wtf.fm" data-text="⍾ wtf.fm | the best fucking way to find new music via @jiggabits + @butchershopsf" data-hashtags="WTFfm">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <br>
+        <div class="fb-like" data-href="http://wtf.fm" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
+        -->
+      </div>
+      <div class="credits">
+        Made by <a class="jiggabitsLink" href="http://soundcloud.com/jiggabits">jiggabits</a> &amp; <a class=" butchershopLink" href="http://butchershopcreative.com/">Butchershop Creative</a>
+      </div>
+    </footer>
   </div>
-
-
-
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
   <script type="text/javascript" src="http://w.soundcloud.com/player/api.js"></script>
+  <script type="text/javascript" src="js/application.js"></script>
+  <!--
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=252090111493728";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  -->
   <script type="text/javascript">
-    $(function() {
-
-      SC.initialize({
-          client_id: "b1ec133b0f33710d7443875249facd57"
-      });
-
-      var hot_tracks, widget;
-
-      var greetings = [
-        'Listen to some fucking ',
-        'Bet you never fucking heard ',
-        'Your fucking ears will be graced by ',
-        'The fucking Music Gods have brought you ',
-        'Muh fucking Mozart is chanelled through ',
-        'Your life was fucking incomplete without ',
-        'Bro, fucking listen to '
-      ];
-
-
-	function getRandomTrack(aTag) {
-		this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
-		this.whatTag = aTag;
-		return randomTrack
-	      }
-
-	function getGreeting() {
-		$(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
-		var soundCloudUser = this.randomTrack.user.username;
-		var soundCloudUserUrl = this.randomTrack.user.permalink_url;
-		$(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
-		}
-
-	function playNextTrack(widget) {
-		widget.load(getRandomTrack(this.whatTag).uri, {
-			auto_play: true,
-			sharing: false,
-			});
-		getGreeting();
-		}
-
-
-	function play(track) {
-		var currentTrack = null;
-		// SC Playing http://developers.soundcloud.com/docs/api/guide#playing
-		// SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
-	
-		SC.oEmbed(track.uri, {show_comments: false, sharing: false, auto_play: true}, function(oembed) {
-			// Embed iframe
-			$(".music").html(oembed.html);
-			// http://developers.soundcloud.com/docs/api/html5-widget#methods
-			widget = SC.Widget($(".music iframe")[0]);
-			widget.bind(SC.Widget.Events.READY, function (e) {
-				$(".username").css("visibility", "visible");
-				$("nav").css("visibility", "visible");
-				$(".next").click(function() {
-					playNextTrack(widget);	      
-					});
-				playPause();
-				widget.bind(SC.Widget.Events.FINISH, function () {
-					playNextTrack(widget);
-					});
-				});
-			});
-		}	
-	
-	//PLAY/PAUSE ANIMATION and KEYBOARD/SPACEBAR STROKE
-	function playPause() {
-		$(document).keypress(function(e) {
-			//If spacebar (32) is pressed, togglePlay and return false
-			if ((e.which && e.which == 32) || (e.keyCode && e.keyCode == 32)) {  
-				togglePlay();
-				return false;  
-			} else {  
-				return true;  
-				}  
-			});
-
-		$('#playButton').click(function(){
-			togglePlay();
-			return false;
-			});
-
-		function togglePlay(){
-			var $elem = $('#player').children(':first');
-				$elem.stop()
-					 .show()
-					 .animate({'marginTop':'-175px','marginLeft':'-175px','width':'350px','height':'350px','opacity':'0'},function() {
-						$(this).css({'width':'100px','height':'100px','margin-left':'-50px','margin-top':'-50px','opacity':'1','display':'none'});
-					 });	
-				$elem.parent().append($elem);
-				console.log($("#player").children(":first").attr("id"));
-			if ( $("#player").children(":first").attr("id") == "pause" ) {
-				widget.pause();
-				$("#playButton").html("&nbsp; ► &nbsp;");
-				} else { widget.play();
-					 $("#playButton").html("&nbsp;▐▐ &nbsp;");
-					};
-			};
-		};
-
-
-	//Create an empty array that contains all track uris
-	var containsAllUris = {};
-	var countCheck = 0;
-	var tagCount = $("#selectATag option").length;
-
-	function getTrack(tag) {
-		if (tag === "HotTracks") { 
-			SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
-				containsAllUris[tag] = tracks;
-				counts();
-				});
-			} else {
-				SC.get("/tracks?filter=public&order=hotness&tags=" + tag, {limit: 50}, function(tracks) {
-					containsAllUris[tag] = tracks;
-					counts();
-					});
-				};
-		};
-
-	//This counts
-	function counts() {
-		countCheck++;
-		if ( countCheck < tagCount ) {
-			}	else {
-				play(getRandomTrack("HotTracks"));
-				getGreeting();
-				};
-		};
-
-	//For each dropdown value, pull 50 tracks
-	$("#selectATag option").each( function() {
-		getTrack($(this).val());
-		});
-
-	//Do this everytime you change tags	
-	$("#selectATag").change( function() {
-		widget.load(getRandomTrack($(this).val()).uri, {
-			auto_play: true,
-			sharing: false,
-			show_comments: false,
-			});
-		getGreeting();
-		});	
-	});
-
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-33400573-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
   </script>
 </body>
 </html>
-
