@@ -17,7 +17,7 @@
   ];
 
   function getRandomTrack(aTag) {
-    var genre = Uris.where({name: aTag});
+    var genre = genres.where({name: aTag});
     console.log(genre);
     this.randomTrack = Uris.aTag[Math.floor(aTag.length*Math.random())];
     this.whatTag = aTag;
@@ -110,16 +110,12 @@
     }
   }
 
-  // Model that contains all genres
-  var Genre = Backbone.Model.extend({
-    name: 'undefined',
-    trackArray: new Array()
-  });
+  var Track = Backbone.Model.extend({});
+  var Genre = Backbone.Model.extend({});
+  var Genres = Backbone.Collection.extend({});
 
-  var Uris = Backbone.Collection.extend({
-    model: Genre,
-  });
-  
+  var genres = new Genres();
+
   var countCheck = 0;
   var tagCount = $("#selectATag option").length;
 
@@ -127,16 +123,14 @@
     if (tag === "HotTracks") {
       SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
         //containsUris[tag] = tracks;
-        var genre = new Genre({name: tag, trackArray: tracks});
-        var uris = new Uris(genre);
-        console.log(uris.toJSON());
+        var genre = new Genre({name: tag, tracks: tracks});
+        genres.add(genre);
         counts();
       });
     } else {
       SC.get("/tracks?filter=public&order=hotness&tags=" + tag, {limit: 50}, function(tracks) {
-        var genre = new Genre({name: tag, trackArray: tracks});
-        var uris = new Uris(genre);
-        console.log(uris.toJSON());
+        var genre = new Genre({name: tag, tracks: tracks});
+        genres.add(genre);
         counts();
       });
     }
@@ -147,7 +141,7 @@
     countCheck++;
     if ( countCheck < tagCount ) {
     } else {
-      console.log(Uris.length);
+      console.log(genres.length);
       play(getRandomTrack("HotTracks"));
       getGreeting();
     }
