@@ -111,7 +111,16 @@
   }
 
   // Model that contains all genres
-  var Track = Backbone.Model.extend({});
+  var Track = Backbone.Model.extend({
+    link: null,
+    title: null,
+    onChange: function() {
+      // Update Social Links
+    },
+    onLeave: function() {
+      //Save track and last played spot in track
+    }
+  });
   var Genre = Backbone.Model.extend({});
   var Genres = Backbone.Collection.extend({});
  
@@ -175,40 +184,7 @@
     isnew: " " //true or false
 
   });
-  //Create Track Model
-  var track = Backbone.Model.extend({
-    
-    info: function() {
-      //retrieves all track info for the following attributes...
-    },
-    
-    uri: " ",
-    artist: " ",
-    title: " ",
-    link: " "
 
-    //Above attributes could also be functions that insert track.info into the right place on page
-    
-  });
-
-  //Create Genre Model
-  var genre = Backbone.Model.extend({
-    
-    current: function() {
-      //displays current genre 
-    },
-
-    tracks: " ", 
-
-  });
-
-  //Link model
-  var link = Backbone.Model.extend({
-
-    current: " ", //URL of current track
-
-    shared: " " //URL of shared track that user is visiting from
-    
-  });
+  var track = new Track();
 
 })(jQuery, window);
