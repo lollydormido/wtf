@@ -17,7 +17,9 @@
   ];
 
   function getRandomTrack(aTag) {
-    this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
+    var genre = Uris.where({name: aTag});
+    console.log(genre);
+    this.randomTrack = Uris.aTag[Math.floor(aTag.length*Math.random())];
     this.whatTag = aTag;
     return randomTrack;
   }
@@ -108,20 +110,33 @@
     }
   }
 
-  // Create an empty array that contains all track uris
-  var containsAllUris = {};
+  // Model that contains all genres
+  var Genre = Backbone.Model.extend({
+    name: 'undefined',
+    trackArray: new Array()
+  });
+
+  var Uris = Backbone.Collection.extend({
+    model: Genre,
+  });
+  
   var countCheck = 0;
   var tagCount = $("#selectATag option").length;
 
   function getTrack(tag) {
     if (tag === "HotTracks") {
       SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
-        containsAllUris[tag] = tracks;
+        //containsUris[tag] = tracks;
+        var genre = new Genre({name: tag, trackArray: tracks});
+        var uris = new Uris(genre);
+        console.log(uris.toJSON());
         counts();
       });
     } else {
       SC.get("/tracks?filter=public&order=hotness&tags=" + tag, {limit: 50}, function(tracks) {
-        containsAllUris[tag] = tracks;
+        var genre = new Genre({name: tag, trackArray: tracks});
+        var uris = new Uris(genre);
+        console.log(uris.toJSON());
         counts();
       });
     }
@@ -132,6 +147,7 @@
     countCheck++;
     if ( countCheck < tagCount ) {
     } else {
+      console.log(Uris.length);
       play(getRandomTrack("HotTracks"));
       getGreeting();
     }
@@ -155,17 +171,17 @@
   //Begin backbone.js here
 
   //Create User model
-  var user = Backbone.Model.Extend({
+  var user = Backbone.Model.extend({
     
     ip: function() {
       //gets user IP address and identifies if user is new
     },    
 
-    new: " ", //true or false
+    isnew: " " //true or false
 
   });
   //Create Track Model
-  var track = Backbone.Model.Extend({
+  var track = Backbone.Model.extend({
     
     info: function() {
       //retrieves all track info for the following attributes...
@@ -174,31 +190,29 @@
     uri: " ",
     artist: " ",
     title: " ",
-    link: " " ,
+    link: " "
 
     //Above attributes could also be functions that insert track.info into the right place on page
     
   });
 
   //Create Genre Model
-  var genre = Backbone.Model.Extend({
+  var genre = Backbone.Model.extend({
     
     current: function() {
       //displays current genre 
     },
 
-    top50: function() {
-      //retrieves all top 50 tracks of current genre
-    }, 
+    tracks: " ", 
 
   });
 
   //Link model
-  var link = Backbone.Model.Extend({
+  var link = Backbone.Model.extend({
 
     current: " ", //URL of current track
 
-    shared: " ", //URL of shared track that user is visiting from
+    shared: " " //URL of shared track that user is visiting from
     
   });
 
