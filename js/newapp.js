@@ -143,7 +143,6 @@
     if ( countCheck < tagCount ) {
     } else {
       console.log(genres.length);
-      console.log(genres);
       play(getRandomTrack("HotTracks"));
       getGreeting();
     }
