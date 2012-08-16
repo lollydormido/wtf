@@ -22,11 +22,10 @@
     this.randomTrack = arrayOfTracks[Math.floor(arrayOfTracks.length*Math.random())];
     this.whatTag = aTag;
     // Route a URL for this track
-    var link = new Link;
-    Backbone.history.start();
     var song = randomTrack.user.permalink + "-" + randomTrack.permalink;
-    console.log(song);
-    link.navigate("/" + song);
+    var link = new Link;
+    localStorage[song] = JSON.stringify(randomTrack);
+    link.navigate(song);
     return randomTrack;
   }
 
@@ -155,8 +154,12 @@
   function counts() {
     // Count tracks
     countCheck++;
-    if ( countCheck < tagCount ) {
-    } else {
+    if( countCheck < tagCount ) {
+    } else if ( link.length > 0 ) {
+        console.log("It's true!");
+        play(this.track);
+      }
+      else {
       console.log(genres.length);
       play(getRandomTrack("HotTracks"));
       getGreeting();
@@ -164,9 +167,11 @@
   }
 
   // For each dropdown value, pull 50 tracks
-  $("#selectATag option").each( function() {
-    getTrack($(this).val());
-  });
+  function allTags() {
+    $("#selectATag option").each( function() {
+      getTrack($(this).val());
+    });
+  };
 
   // Do this everytime you change tags
   $("#selectATag").change( function() {
@@ -186,10 +191,19 @@
     loadSong: function( song ) {
       // Get song
       console.log("Get " + song);
-      var blahBlah = randomTrack.uri;
-      console.log(blahBlah);
-    }
+      if ( song.length > 0 ) {
+        var track = JSON.parse(localStorage[song]);
+        play(track);
+      } else {
+        allTags();
+        }
+      // Set social sharing links for song      
+    } 
   });
+
+  var link = new Link;
+
+  Backbone.history.start();
 
   //Create User model
   var user = Backbone.Model.extend({
