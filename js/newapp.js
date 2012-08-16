@@ -21,6 +21,12 @@
     var arrayOfTracks = genre[0].attributes.tracks;
     this.randomTrack = arrayOfTracks[Math.floor(arrayOfTracks.length*Math.random())];
     this.whatTag = aTag;
+    // Route a URL for this track
+    var link = new Link;
+    Backbone.history.start();
+    var song = randomTrack.user.permalink + "-" + randomTrack.permalink;
+    console.log(song);
+    link.navigate("/" + song);
     return randomTrack;
   }
 
@@ -172,7 +178,18 @@
     getGreeting();
   });
 
-  //Begin backbone.js here
+  var Link = Backbone.Router.extend({
+    routes: {
+      "*song":        "loadSong"        // #/*song
+    },
+
+    loadSong: function( song ) {
+      // Get song
+      console.log("Get " + song);
+      var blahBlah = randomTrack.uri;
+      console.log(blahBlah);
+    }
+  });
 
   //Create User model
   var user = Backbone.Model.extend({
