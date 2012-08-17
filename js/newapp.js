@@ -21,18 +21,17 @@
 
   function getRandomTrack(aTag) {
     var genre = genres.where({name: aTag});
-    console.log("getRandomTrack + " + genre);
     var arrayOfTracks = genre[0].attributes.tracks;
     randomTrack = arrayOfTracks[Math.floor(arrayOfTracks.length*Math.random())];
     whatTag = aTag;
     return randomTrack;
   }
 
-  function createLink(trackObject) {
-    var song = randomTrack.user.permalink + "-" + randomTrack.permalink;
+  function createLink(trackID) {
+    var song = trackID;
+    console.log("song is " + song);
     var link = new Link;
-    localStorage[song] = JSON.stringify(randomTrack);
-    link.navigate(song);
+    link.navigate("/" + song);
     console.log("Link created");
   }
 
@@ -52,7 +51,6 @@
   }
 
   function play(track) {
-    var currentTrack = null;
     // SC Playing http://developers.soundcloud.com/docs/api/guide#playing
     // SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
     SC.oEmbed(track.uri, {show_comments: false, sharing: false, auto_play: true}, function(oembed) {
@@ -68,9 +66,10 @@
         });
         playPause();
         widget.bind(SC.Widget.Events.PLAY, function(track) {
-          console.log("PLAY");
-          // When track starts playing, create link
-          createLink(track);
+           widget.getCurrentSound(function (track) { 
+            //Now create a link for this sound
+            createLink(track.id);
+          });
         });
         widget.bind(SC.Widget.Events.FINISH, function () {
           playNextTrack(widget);
@@ -176,10 +175,12 @@
   // Sees if the URL has a track in it
   function checkForTrack() {
     if ( hasTrack == true) {
-      var track = JSON.parse(localStorage[trackObject]);
-      play(track);
-      whatTag = "HotTracks";
-      getGreeting();  
+      SC.get("/tracks/" + trackObject,  function(track) {
+        randomTrack = track;
+        play(track);
+        getGreeting();
+        whatTag = "HotTracks";
+      });
     } else {
       console.log(genres.length);
       play(getRandomTrack("HotTracks"));
@@ -212,15 +213,11 @@
     },
 
     loadSong: function( song ) {
-      console.log("Get " + song);
       if ( song.length > 0 ) {
         // If URL hasTrack, then set to true
+        console.log("loadSong");
         hasTrack = true;
         trackObject = song;
-        randomTrack = JSON.parse(localStorage[song]);
-        console.log(randomTrack);
-        //var track = JSON.parse(localStorage[song]);
-        //play(track);
       } else {}
     } 
   });
