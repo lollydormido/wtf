@@ -16,28 +16,36 @@
     'Bro, fucking listen to '
   ];
 
+  var whatTag;
+  var randomTrack;
+
   function getRandomTrack(aTag) {
     var genre = genres.where({name: aTag});
+    console.log("getRandomTrack + " + genre);
     var arrayOfTracks = genre[0].attributes.tracks;
-    this.randomTrack = arrayOfTracks[Math.floor(arrayOfTracks.length*Math.random())];
-    this.whatTag = aTag;
+    randomTrack = arrayOfTracks[Math.floor(arrayOfTracks.length*Math.random())];
+    whatTag = aTag;
     // Route a URL for this track
+    createLink(randomTrack); 
+    return randomTrack;
+  }
+
+  function createLink(trackObject) {
     var song = randomTrack.user.permalink + "-" + randomTrack.permalink;
     var link = new Link;
     localStorage[song] = JSON.stringify(randomTrack);
     link.navigate(song);
-    return randomTrack;
   }
 
   function getGreeting() {
     $(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
-    var soundCloudUser = this.randomTrack.user.username;
-    var soundCloudUserUrl = this.randomTrack.user.permalink_url;
+    var soundCloudUser = randomTrack.user.username;
+    var soundCloudUserUrl = randomTrack.user.permalink_url;
     $(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
   }
 
   function playNextTrack(widget) {
-    widget.load(getRandomTrack(this.whatTag).uri, {
+    widget.load(getRandomTrack(whatTag).uri, {
       auto_play: true,
       sharing: false
     });
@@ -60,6 +68,9 @@
           playNextTrack(widget);
         });
         playPause();
+        widget.bind(SC.Widget.Events.PLAY, function() {
+          console.log("PLAY");
+        });
         widget.bind(SC.Widget.Events.FINISH, function () {
           playNextTrack(widget);
         });
@@ -130,6 +141,7 @@
   var Genres = Backbone.Collection.extend({});
  
   var genres = new Genres(); 
+  var track = new Track();
 
   var countCheck = 0;
   var tagCount = $("#selectATag option").length;
@@ -155,23 +167,29 @@
     // Count tracks
     countCheck++;
     if( countCheck < tagCount ) {
-    } else if ( link.length > 0 ) {
-        console.log("It's true!");
-        play(this.track);
-      }
-      else {
-      console.log(genres.length);
-      play(getRandomTrack("HotTracks"));
-      getGreeting();
+      } else {
+      checkForTrack();
     }
   }
 
+  // Sees if the URL has a track in it
+  function checkForTrack() {
+    if ( hasTrack == true) {
+      var track = JSON.parse(localStorage[trackObject]);
+      play(track);
+      whatTag = "HotTracks";
+      getGreeting();  
+    } else {
+      console.log(genres.length);
+      play(getRandomTrack("HotTracks"));
+      getGreeting();
+      }
+  }
+
   // For each dropdown value, pull 50 tracks
-  function allTags() {
-    $("#selectATag option").each( function() {
-      getTrack($(this).val());
-    });
-  };
+  $("#selectATag option").each( function() {
+    getTrack($(this).val());
+  });
 
   // Do this everytime you change tags
   $("#selectATag").change( function() {
@@ -183,21 +201,26 @@
     getGreeting();
   });
 
+  // Variable that tells us if the URL has a track (true/false)
+  var hasTrack;
+  var trackObject;
+
   var Link = Backbone.Router.extend({
     routes: {
       "*song":        "loadSong"        // #/*song
     },
 
     loadSong: function( song ) {
-      // Get song
       console.log("Get " + song);
       if ( song.length > 0 ) {
-        var track = JSON.parse(localStorage[song]);
-        play(track);
-      } else {
-        allTags();
-        }
-      // Set social sharing links for song      
+        // If URL hasTrack, then set to true
+        hasTrack = true;
+        trackObject = song;
+        randomTrack = JSON.parse(localStorage[song]);
+        console.log(randomTrack);
+        //var track = JSON.parse(localStorage[song]);
+        //play(track);
+      } else {}
     } 
   });
 
@@ -215,7 +238,5 @@
     isnew: " " //true or false
 
   });
-
-  var track = new Track();
 
 })(jQuery, window);
