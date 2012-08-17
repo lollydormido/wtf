@@ -25,8 +25,6 @@
     var arrayOfTracks = genre[0].attributes.tracks;
     randomTrack = arrayOfTracks[Math.floor(arrayOfTracks.length*Math.random())];
     whatTag = aTag;
-    // Route a URL for this track
-    createLink(randomTrack); 
     return randomTrack;
   }
 
@@ -35,6 +33,7 @@
     var link = new Link;
     localStorage[song] = JSON.stringify(randomTrack);
     link.navigate(song);
+    console.log("Link created");
   }
 
   function getGreeting() {
@@ -68,8 +67,10 @@
           playNextTrack(widget);
         });
         playPause();
-        widget.bind(SC.Widget.Events.PLAY, function() {
+        widget.bind(SC.Widget.Events.PLAY, function(track) {
           console.log("PLAY");
+          // When track starts playing, create link
+          createLink(track);
         });
         widget.bind(SC.Widget.Events.FINISH, function () {
           playNextTrack(widget);
