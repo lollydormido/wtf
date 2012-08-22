@@ -203,6 +203,32 @@
     getGreeting();
   });
 
+  //Social View
+  var Social = Backbone.View.extend({
+    tagName: "a",
+
+    className: "twitter-share-button",
+
+    events: {
+      "route:link":     "route"
+    },
+
+    render: function() {
+      //Thank you http://backbonetutorials.com/what-is-a-view/
+      //Compile template using underscore
+      var template = _.template ( $("#sharing_html").html(), {} );
+      //Load the compiled HTML into the Backbone "el"
+      this.el.html( template );
+    },
+  
+    route: function() {
+      this.model.get("route_url");
+    } 
+    
+      
+  });
+ 
+  var social = new Social({ el: $("#sharing") }); 
   // Variable that tells us if the URL has a track (true/false)
   var hasTrack;
   var trackObject;
