@@ -1,7 +1,10 @@
 ;(function($, window, undefined) {
 
+  // Use Mustache syntax for templates
+  _.templateSettings.interpolate = /\{\{(.+?)\}\}/g;
+
   SC.initialize({
-      client_id: "b1ec133b0f33710d7443875249facd57"
+    client_id: "b1ec133b0f33710d7443875249facd57"
   });
 
   var hot_tracks, widget;
@@ -27,10 +30,61 @@
     return randomTrack;
   }
 
+  // Social View
+
+  var TwitterView = Backbone.View.extend({
+    initialize: function () {
+      _.bindAll(this, "render");
+      this.model.bind("change", this.render);
+      this.template = _.template($("#twitter-template").html());
+    },
+    render: function () {
+      $(this.el).html(this.template(this.model.toJSON()));
+      return this;
+    }
+  });
+
+  var FacebookView = Backbone.View.extend({
+    initialize: function () {
+      console.log("in initialize");
+      _.bindAll(this, "render");
+      this.model.bind("change", this.render);
+      this.template = _.template($("#facebook-template").html());
+    },
+    render: function () {
+      console.log("in render");
+      $(this.el).html(this.template(this.model.toJSON()));
+      return this;
+    }
+  });
+
+
   function createLink(trackID) {
     var song = trackID;
     console.log("song is " + song);
-    var link = new Link;
+    var link = new Link();
+
+    // 1. Instantiate Track
+
+    var track = new Track();
+
+    // 2. Instantiate Social Views
+
+    var twitter = new TwitterView({
+      el: $("#twitter-view"),
+      model: track
+    });
+
+    var facebook =  new FacebookView({
+      el: $("#facebook-view"),
+      model: track
+    });
+
+
+    // 3 Set uri to trackID
+
+    track.set({uri: trackID});
+
     link.navigate("/" + song);
     console.log("Link created");
   }
@@ -66,7 +120,7 @@
         });
         playPause();
         widget.bind(SC.Widget.Events.PLAY, function(track) {
-           widget.getCurrentSound(function (track) { 
+           widget.getCurrentSound(function (track) {
             //Now create a link for this sound
             createLink(track.id);
           });
@@ -128,19 +182,14 @@
 
   // Model that contains all genres
   var Track = Backbone.Model.extend({
-    link: null,
-    title: null,
-    onChange: function() {
-      // Update Social Links
-    },
-    onLeave: function() {
-      //Save track and last played spot in track
-    }
+    uri: null,
+    title: null
   });
+
   var Genre = Backbone.Model.extend({});
   var Genres = Backbone.Collection.extend({});
- 
-  var genres = new Genres(); 
+
+  var genres = new Genres();
   var track = new Track();
 
   var countCheck = 0;
@@ -174,7 +223,7 @@
 
   // Sees if the URL has a track in it
   function checkForTrack() {
-    if ( hasTrack == true) {
+    if (hasTrack === true) {
       SC.get("/tracks/" + trackObject,  function(track) {
         randomTrack = track;
         play(track);
@@ -185,7 +234,7 @@
       console.log(genres.length);
       play(getRandomTrack("HotTracks"));
       getGreeting();
-      }
+    }
   }
 
   // For each dropdown value, pull 50 tracks
@@ -203,33 +252,8 @@
     getGreeting();
   });
 
-  //Social View
-  var Social = Backbone.View.extend({
-    tagName: "a",
-
-    className: "twitter-share-button",
-
-    events: {
-      "route:link":     "route"
-    },
-
-    render: function() {
-      //Thank you http://backbonetutorials.com/what-is-a-view/
-      //Compile template using underscore
-      var template = _.template ( $("#sharing_html").html(), {} );
-      //Load the compiled HTML into the Backbone "el"
-      this.el.html( template );
-    },
-  
-    route: function() {
-      this.model.get("route_url");
-    } 
-    
-      
-  });
- 
-  var social = new Social({ el: $("#sharing") }); 
   // Variable that tells us if the URL has a track (true/false)
+
   var hasTrack;
   var trackObject;
 
@@ -237,27 +261,28 @@
     routes: {
       "*song":        "loadSong"        // #/*song
     },
-
     loadSong: function( song ) {
       if ( song.length > 0 ) {
         // If URL hasTrack, then set to true
         console.log("loadSong");
         hasTrack = true;
         trackObject = song;
-      } else {}
-    } 
+      } else {
+
+      }
+    }
   });
 
-  var link = new Link;
+  var link = new Link();
 
   Backbone.history.start();
 
   //Create User model
   var user = Backbone.Model.extend({
-    
+
     ip: function() {
       //gets user IP address and identifies if user is new
-    },    
+    },
 
     isnew: " " //true or false
 
