@@ -59,7 +59,7 @@
   });
 
 
-  function createLink(trackID) {
+  function createLink(trackID, artist, artwork) {
     var song = trackID;
     console.log("song is " + song);
     var link = new Link();
@@ -82,10 +82,9 @@
 
 
     // 3 Set uri to trackID
-
-    track.set({uri: trackID});
-
+    track.set({uri: trackID, username: artist, picture: artwork });
     link.navigate("/" + song);
+    console.log(track.get("picture"));
     console.log("Link created");
   }
 
@@ -122,7 +121,7 @@
         widget.bind(SC.Widget.Events.PLAY, function(track) {
            widget.getCurrentSound(function (track) {
             //Now create a link for this sound
-            createLink(track.id);
+            createLink(track.id, track.user.username, track.artwork_url);
           });
         });
         widget.bind(SC.Widget.Events.FINISH, function () {
@@ -180,10 +179,11 @@
     }
   }
 
-  // Model that contains all genres
+  // Model that contains all genre
   var Track = Backbone.Model.extend({
     uri: null,
-    title: null
+    username: null,
+    picture: null,
   });
 
   var Genre = Backbone.Model.extend({});
@@ -259,7 +259,7 @@
 
   var Link = Backbone.Router.extend({
     routes: {
-      "*song":        "loadSong"        // #/*song
+      "*song":        "loadSong"        // #*song
     },
     loadSong: function( song ) {
       if ( song.length > 0 ) {

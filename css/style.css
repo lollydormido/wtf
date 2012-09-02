@@ -191,6 +191,50 @@ footer a:link.butchershopLink, footer a:visited.butchershopLink {
   float: left;
 }
 
+div#twitter-view, div#facebook-view {
+  position: relative;
+  margin: 20px 0;
+  height: 20px;
+  font-family: 'Port Lligat Slab', serif;
+}
+
+div#twitter-view a.template:link, div#twitter-view a.template:visited, div#facebook-view a.template:link, div#facebook-view a.template:visited {
+  text-decoration: none;
+  color: #FFF;
+  display: inline;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: black;
+  padding: 10px;
+  box-shadow: 5px 5px 1px #DDDCDC;
+}
+
+div#twitter-view a.template:hover, div#facebook-view a.template:hover {
+  text-shadow: -1px -3px 2px #313238;
+  background: -webkit-linear-gradient(top, #313238 0%, black 100%);
+  background: -webkit-gradient(top, #313238 0%, black 100%); /* Safari 4+, Chrome 2+ */
+  background: -moz-linear-gradient(top, #313238 0%, black 100%); /* FF 3.6+ */
+  background: -ms-linear-gradient(top, #313238 0%, black 100%); /* IE10 */
+  background: -o-linear-gradient(top, #313238 0%, black 100%);
+}
+
+div#twitter-view a.twitter-share:hover {
+  background: url('../images/twitter_active.png');
+}
+
+div#facebook-view a.facebook-share:link, div#facebook-view .facebook-share a:visited {
+  background: url('../images/facebook_dark.png');
+  display: block;
+  width: 64px;
+  height: 64px;
+  text-decoration: none;
+}
+
+div#facebook-view a.facebook-share:hover {
+  background: url('../images/facebook_active.png');
+}
+
 .credits {
   position: relative;
   padding: 10px;

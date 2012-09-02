@@ -21,60 +21,22 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-  <div id="twitter-view"></div>
-  <div id="facebook-view"></div>
-  <div class="player" id="player">
-    <img id="play" src="images/play.png" width="100" height="100" style="display:none;"/>
-    <img id="pause" src="images/pause.png" width="100" height="100" style="display:none;"/>
+  <div id="test">
+    <a href="http://www.facebook.com/dialog/feed?
+    app_id=478261902192487&
+    display=popup&
+    link=http://wtf.fm&
+    description='This is the description'&
+    name='This is the name property'&
+    picture=&
+    caption='This is a caption'&
+    redirect_uri=http://www.wtf.fm">facebook</a>
   </div>
-  <div class="container">
-    <header><h1><a href="/">WTF.fm</a></h1></header>
-    <div class="content">
-      <span class="listenToGreeting">Loading them tracks...</span>
-      <span class="username"><a href="#"></a></span>
-    </div>
-    <div class="music"><img src="images/loading.gif" alt="Loading..."></div>
-    <nav>
-      <ul>
-        <li><a href="#" class="next">Next fucking track</a></li>
-        <li><a href="#" class="playButton" id="playButton">&nbsp;&#9616;&#9616;&nbsp;</a></li>
-      </ul>
-      <form name="chooseTag">
-        <label>Now Playing:</label>
-        <select id="selectATag">
-          <option value="HotTracks">Hot Tracks</option>
-          <option value="2012">2012</option>
-          <option value="Acoustic">Acoustic</option>
-          <option value="Bass">Bass</option>
-          <option value="Beat">Beat</option>
-          <option value="Cover">Cover</option>
-          <option value="Dance">Dance</option>
-          <option value="Deep">Deep</option>
-          <option value="Dj">Dj</option>
-          <option value="Drum">Drum</option>
-          <option value="Drum%20&amp;%20Bass">Drum &amp; Bass</option>
-          <option value="Dubstep">Dubstep</option>
-          <option value="Electronic">Electronic</option>
-          <option value="Electronic%20House">Electronic House</option>
-          <option value="Funk">Funk</option>
-          <option value="Hip-hop%2Frap">Hip-hop/rap</option>
-          <option value="Hiphop">Hiphop</option>
-          <option value="House">House</option>
-          <option value="Instrumental">Instrumental</option>
-          <option value="Minimal">Minimal</option>
-          <option value="Mix">Mix</option>
-          <option value="Music">Music</option>
-          <option value="Original">Original</option>
-          <option value="Pop">Pop</option>
-          <option value="Progressive">Progressive</option>
-          <option value="Rap">Rap</option>
-          <option value="Remix">Remix</option>
-          <option value="Rock">Rock</option>
-          <option value="Techno">Techno</option>
-          <option value="Trance">Trance</option>
-        </select>
-      </form>
-    </nav>
+
+  <div id="test-twitter">
+    <a href="https://twitter.com/share?url=http://www.wtf.fm&text='I found this track by blah on wtf.fm'&counturl=http://www.wtf.fm&hashtags=WTFfm">Twitter</a>
+  </div>
+
     <footer>
       <div class="sharing">
         <a href="https://twitter.com/share" data-url="http://wtf.fm" class="twitter-share-button" data-text="Check out this track by [artist] on ⍾ wtf.fm via @jiggabits + @butchershopsf" data-hashtags="WTFfm">Tweet</a>
@@ -115,13 +77,7 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
-  <script type="text/html" id="twitter-template">
-    <a class="template" href="https://twitter.com/share?url=http://www.wtf.fm&text=Listen%20to%20{{username}}%20on%20WTF.fm&counturl=http://www.wtf.fm#{{uri}}&hashtags=WTFfm">Twitter</a>
-  </script>
-
-  <script type="text/html" id="facebook-template">
-    <a class="template" href="http://www.facebook.com/dialog/feed?app_id=478261902192487&display=popup&link=http://wtf.fm{{uri}}&description=&#9086;%20wtf.fm%20|%20The%20best%20fucking%20way%20to%20find%20new%20music&name=Listen%20to%20some%20fucking%20{{username}}&picture={{picture}}&caption=on%20&#9086;%20wtf.fm&redirect_uri=http://www.wtf.fm">facebook</a>
-  </script>
-
+  <script type="text/html" id="twitter-template"><a href="https://twitter.com/share" class="twitter-share" data-lang="eng" data-text="Listening to {{username}} on wtf.fm" url="http://www.wtf.fm/"></a></script>
+  <script type="text/html" id="facebook-template"><a href="http://www.facebook.com/dialog/feed?app_id=478261902192487&link=http://www.wtf.fm#{{uri}}&name=Facebook%20Dialogs&caption=Reference%20Documentation&redirect_uri=http://www.wtf.fm&picture={{picture}}" class="facebook-share"></a></script>
 </body>
 </html>
