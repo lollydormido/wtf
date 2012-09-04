@@ -66,25 +66,24 @@
 
     // 1. Instantiate Track
 
-    var track = new Track();
+    var trackModel = new Track();
 
     // 2. Instantiate Social Views
 
     var twitter = new TwitterView({
       el: $("#twitter-view"),
-      model: track
+      model: trackModel
     });
 
     var facebook =  new FacebookView({
       el: $("#facebook-view"),
-      model: track
+      model: trackModel
     });
 
 
     // 3 Set uri to trackID
-    track.set({uri: trackID, username: artist, picture: artwork });
-    link.navigate("/" + song);
-    console.log(track.get("picture"));
+    trackModel.set({uri: trackID, username: artist, picture: artwork });
+    link.navigate("/" + song, {trigger: true});
     console.log("Link created");
   }
 
@@ -190,7 +189,6 @@
   var Genres = Backbone.Collection.extend({});
 
   var genres = new Genres();
-  var track = new Track();
 
   var countCheck = 0;
   var tagCount = $("#selectATag option").length;
@@ -225,6 +223,7 @@
   function checkForTrack() {
     if (hasTrack === true) {
       SC.get("/tracks/" + trackObject,  function(track) {
+        console.log("hasTrack = " + hasTrack);
         randomTrack = track;
         play(track);
         getGreeting();
@@ -262,20 +261,24 @@
       "*song":        "loadSong"        // #*song
     },
     loadSong: function( song ) {
-      if ( song.length > 0 ) {
+      // added additionally compare statement
+      // by default, new.html will be considered a route/song
+      if ( song.length > 0 && song != "new.html" ) {
+        console.log(song);
         // If URL hasTrack, then set to true
-        console.log("loadSong");
         hasTrack = true;
         trackObject = song;
       } else {
-
       }
     }
   });
-
+ 
+  var URL = window.location;
+  console.log(URL);
+ 
   var link = new Link();
 
-  Backbone.history.start();
+  Backbone.history.start( {pushState: true, root: "/WHATTHEFUCKSHOULDILISTENTO/"} );
 
   //Create User model
   var user = Backbone.Model.extend({
