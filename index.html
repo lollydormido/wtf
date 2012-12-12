@@ -8,13 +8,13 @@
   <meta property="og:url" content="http://wtf.fm">
   <link rel="img_src" href="http://wtf.fm/images/screenshot.png">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <!--http://www.google.com/webfonts/#UsePlace:use/Collection:Alfa+Slab+One|Kelly+Slab|Port+Lligat+Slab-->
   <link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One|Port+Lligat+Slab' rel='stylesheet' type='text/css'>
 </head>
 <body>
+  <div id="facebook-view"></div>
   <div class="player" id="player">
-    <img id="play" src="images/play.png" width="100" height="100" style="display:none;"/>
-    <img id="pause" src="images/pause.png" width="100" height="100" style="display:none;"/>
+    <img id="play" src="images/play.png" width="100" height="100" style="display:none;">
+    <img id="pause" src="images/pause.png" width="100" height="100" style="display:none;">
   </div>
   <div class="container">
     <header><h1><a href="/">WTF.fm</a></h1></header>
@@ -66,9 +66,8 @@
     </nav>
     <footer>
       <div class="sharing">
+        <div id="twitter-view"></div>
         <!--
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wtf.fm" data-text="⍾ wtf.fm | the best fucking way to find new music via @jiggabits + @butchershopsf" data-hashtags="WTFfm">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         <br>
         <div class="fb-like" data-href="http://wtf.fm" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
         -->
@@ -78,22 +77,21 @@
       </div>
     </footer>
   </div>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
-  <script type="text/javascript" src="http://w.soundcloud.com/player/api.js"></script>
-  <script type="text/javascript" src="js/application.js"></script>
+  <script src="js/require.js" data-main="js/application.js"></script>
   <!--
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=252090111493728";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+  <script src="http://connect.soundcloud.com/sdk.js"></script>
+  <script src="http://w.soundcloud.com/player/api.js"></script>
+  <script src="js/underscore.js"></script>
+  <script src="js/backbone.js"></script>
+  <script src="js/console.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="js/models.js"></script>
+  <script src="js/views.js"></script>
+  <script src="js/application.js"></script>
   -->
-  <script type="text/javascript">
+  <script>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-33400573-1']);
     _gaq.push(['_trackPageview']);
@@ -103,5 +101,31 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
+  <script type="text/html" id="twitter-template">
+    <a href="https://twitter.com/intent/tweet?button_hashtag=wtffm"
+      class="twitter-hashtag-button"
+      data-counturl="http://www.wtf.fm/#song/{{uri}}"
+      data-hashtags="wtffm"
+      data-lang="en"
+      data-related="wtffm"
+      data-size="large"
+      data-text="Listen to {{username}}"
+      data-url="http://www.wtf.fm/#song/{{uri}}">Tweet #wtffm</a>
+  </script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  <script type="text/html" id="facebook-template">
+   <!--Facebook Dialogue - http://developers.facebook.com/docs/reference/dialogs/feed/-->
+    <a class="template" href="http://www.facebook.com/dialog/feed?app_id=478261902192487&display=popup&link=http://wtf.fm/{{uri}}&description=&#9086;%20wtf.fm%20|%20The%20best%20fucking%20way%20to%20find%20new%20music&name=Listen%20to%20some%20fucking%20{{username}}&picture={{picture}}&caption=on%20&#9086;%20wtf.fm&redirect_uri=http://www.wtf.fm/{{uri}}">facebook</a>
+  </script>
+  <!--
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  -->
 </body>
 </html>

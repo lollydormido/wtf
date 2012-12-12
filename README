@@ -2,11 +2,17 @@ WHAT THE FUCK SHOULD YOU LISTEN TO?
 
 Find new and hot tracks using:
 
-	* HTML5
-	* CSS3
-	* jQuery
-	* SoundCloud API
+  * HTML5
+  * CSS3
+  * jQuery
+  * SoundCloud API
 
 Made by the creative minds of:
 http://soundcloud.com/jiggabits - jiggabits
 http://www.butchershopcreative.com - Butchershop Creative
+
+Questions:
+
+Why do URLs like this one show up? Why is it not possible to reload a URL like that (I get a 404 Not Found)?
+
+http://localhost:8000/WHATTHEFUCKSHOULDILISTENTO/58438188
