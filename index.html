@@ -146,6 +146,14 @@
         'Bro, fucking listen to '
       ];
 
+      //Create a model, view & collection of greetings (above)
+      var Greeting = Backbone.Model.extend({});
+
+      var GreetingList = Backbone.Collection.extend({
+          model: Greeting
+        });
+
+      var greetingList = new GreetingList();
 
 	function getRandomTrack(aTag) {
 		this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
