@@ -150,10 +150,31 @@
       var Greeting = Backbone.Model.extend({});
 
       var GreetingList = Backbone.Collection.extend({
+          //Need to use toJSON: function() {return _.clone(this.attributes)},
+          //Using the above will help modify the JSON before "we send it to the server"
           model: Greeting
         });
 
       var greetingList = new GreetingList();
+
+      //This grabs all the greetings from the greetings array
+      greetingList.reset(greetings);
+
+      console.log(greetingList.toJSON());
+
+      var GreetingView = Backbone.View.extend({
+
+          template: _.template('<span class="listenToGreeting">' + this.model+ '</span>'),
+
+          render: function() {
+              //need to figure out how to render the above template
+              console.log(this.model.toJSON())
+            }
+        });
+
+      var greetingItem = new Greeting();
+      var greetingView = new GreetingView({model: greetingItem});
+      greetingView.render();
 
 	function getRandomTrack(aTag) {
 		this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
