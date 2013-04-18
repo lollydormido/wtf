@@ -146,8 +146,17 @@
         'Bro, fucking listen to '
       ];
 
+
       //Create a model, view & collection of greetings (above)
-      var Greeting = Backbone.Model.extend({});
+      var Greeting = Backbone.Model.extend({
+          defaults: {
+              title: 'Listen to some fucking'
+            },
+        });
+
+      var greeting1 = new Greeting({
+          title: 'THIS IS A FUCKING TESTS'
+        });
 
       var GreetingList = Backbone.Collection.extend({
           //Need to use toJSON: function() {return _.clone(this.attributes)},
@@ -158,23 +167,22 @@
       var greetingList = new GreetingList();
 
       //This grabs all the greetings from the greetings array
-      greetingList.reset(greetings);
 
       console.log(greetingList.toJSON());
 
       var GreetingView = Backbone.View.extend({
-
-          template: _.template('<span class="listenToGreeting">' + this.model+ '</span>'),
+          el: 'span',
 
           render: function() {
               //need to figure out how to render the above template
-              console.log(this.model.toJSON())
+              var html = ('<span class="listenToGreeting">' + this.model.get('title') + '</span>');
+              $(this.el).html(html);
             }
         });
 
-      var greetingItem = new Greeting();
-      var greetingView = new GreetingView({model: greetingItem});
+      var greetingView = new GreetingView({model: greeting1});
       greetingView.render();
+      $('window').append(greetingView.el);
 
 	function getRandomTrack(aTag) {
 		this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
