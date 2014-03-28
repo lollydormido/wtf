@@ -1,0 +1,136 @@
+body {
+
+	background-color: #000;
+
+	color: #000;
+}
+
+#container > div > div {
+	color: #000;
+	font-weight: bold;
+}
+
+#container > div > div.jumbotron {
+	margin-top: 75px;
+	background-color: transparent;
+	color: #FFF;
+	border-radius: 0px;
+	border: 20px solid #FFF;
+}
+
+#container > div > div > h1 {
+	text-shadow: black 5 5 5;
+}
+
+#container > div > div > h1 > div.w {
+	display:inline-block;
+	width: 60px;
+	height: 60px;
+	background: url('../img/w.png');
+	background-size: cover;
+}
+
+#controls > li.trackInfo > a > div {
+	margin-left: 20px;
+	line-height: 1.5em;
+}
+
+#controls > li.trackInfo > a > div > img {
+	display: inline-block;
+	float: left;
+	width: 35px;
+}
+
+#controls > li.trackInfo > a {
+	text-decoration: none;
+}
+
+#controls > li.trackInfo > a > div > span {
+	color: #FFF;
+	text-decoration: none;
+	background-color: #000;
+	display: inline-block;
+	width: 250px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 1.5em;
+}
+
+#container > div.row.track > div > span {
+	color: #FFF;
+	background-color: #000;
+	font-size: 1.7em;
+}
+
+.colophon {
+	position: absolute;
+	width: 100%;
+	bottom: 15px;
+}
+
+/** CONTROLS **/
+
+ul#controls {
+	margin-left: 15px;
+	list-style: none;
+	padding: 0px;
+}
+
+#controls > li {
+	list-style-type: none;
+	vertical-align: bottom;
+}
+
+#controls > li:nth-child(2) {
+	display: none;
+}
+
+#controls > li > img {
+	border: 5px #FFFF00 solid;
+	margin-right: 15px;
+}
+
+#controls > li {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#controls > li.nowPlaying {
+	color: #FFF;
+	font-size: 2em;
+	width: 100px;
+	line-height: .75em;
+	vertical-align: middle;
+}
+
+/** buttons **/
+#playPause, #shuffle {
+	border: 0px;
+	padding: 15px;
+	background-color: #FFFFFF;
+	color: #00FFFF;
+	font-weight: bold;
+}
+
+/** LINKS **/
+
+ul#links {
+	list-style: none;
+	padding: 0px;
+	text-align: right;
+}
+
+#links > li {
+	list-style-type: none;
+}
+
+#soundcloud {
+	border: 0px;
+	width: 64px;
+	height: 43px;
+	padding: 15px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background: url('../img/soundcloud.png');
+}
