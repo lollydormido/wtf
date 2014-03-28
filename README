@@ -1,12 +1,14 @@
-WHAT THE FUCK SHOULD YOU LISTEN TO?
+/** wtf.fm - 2.0 **/
 
-Find new and hot tracks using:
+New features, new interface, new errythang that makes use of:
 
-	* HTML5
-	* CSS3
-	* jQuery
+	* HTML, CSS
+	* Bootstrap 3
+	* jQuery, ajax
 	* SoundCloud API
+	* Tumblr API
 
-Made by the creative minds of:
-http://soundcloud.com/jiggabits - jiggabits
-http://butchershopcreative.com - Butchershop Creative
+This work is not available for use anywhere else unless with permission.
+
+Made for you and 99centbrains.
+Originally inspired by jiggabits + butchershop creative
