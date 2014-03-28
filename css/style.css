@@ -126,6 +126,7 @@ ul#links {
 }
 
 #soundcloud {
+	display: inline-block;
 	border: 0px;
 	width: 64px;
 	height: 43px;
@@ -133,4 +134,18 @@ ul#links {
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background: url('../img/soundcloud.png');
+}
+
+
+/** iPhone **/
+@media (max-width: 320px) {
+	#container > div > div.jumbotron {
+		margin-top: 0px;
+	}
+
+	.colophon {
+		position: relative;
+		width: 100%;
+		bottom: 15px;
+	}
 }
