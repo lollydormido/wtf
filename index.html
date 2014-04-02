@@ -58,7 +58,7 @@
 				<button id="playPause"><span class="glyphicon glyphicon-play"></span></button>
 			</li>
 			<li>
-				<button id="shuffle" onclick="location.href='http://soundcloud.com/99centbrains'" target="_blank">
+				<button id="shuffle">
 					<span class="glyphicon glyphicon-random"></span>
 				</button>
 			</li>
@@ -97,6 +97,12 @@
 
 		supports_html5_storage();
 
+		function Queue(tracks) {
+			this.list = tracks;
+		}
+
+		var queue = new Queue();
+
 		$(document).ready(function() {
 
 			
@@ -110,11 +116,8 @@
 			if (!lastTrack) {
 				refreshPlaylist();
 			  } else {
-
-			  	var track = new Track(lastTrack);
-
-			  	stream(lastTrack.uri, oldeQueue, time);
-			  	//displayTracks(oldeQueue);
+			  	queue.list = oldeQueue;
+			  	stream(lastTrack.uri, time);
 			  	setView(lastTrack);
 			  }
 		});
@@ -151,37 +154,14 @@
 		  });
 		});**/
 
-		//search by username?
-		
-
-		function Track(track) {
-
-			this.artist = track.user.username;
-			this.title = track.title;
-			this.uri = track.uri;
-			this.link = track.permalink_url;
-		
-		}
-
 		function refreshPlaylist() {
 
 			SC.get('/users/33178966/favorites', function(tracks) {
 					console.log('starting tracks is: ' + tracks.length);
-					$(tracks).each( function(i) {
-
-						//gets rid of any tracks that
-						//are not streamable.
-						if(!this.streamable) {
-							tracks.splice(i, 1);
-						}
-
-					})
-
-					set(tracks);
+					queue.list = tracks;
+					set();
 
 					//displayTracks(tracks);
-
-
 				});
 		}
 
@@ -198,35 +178,36 @@
 		    return o;
 		};
 
-		function set(tracks) {
+		function set() {
 
-			$(tracks).each( function() {
-			
-			})
-
-			var shuffled = shuffle(tracks);
+			var shuffled = shuffle(queue.list);
 
 			var index = shuffled.shift();
+			queue.list = shuffled;
+
+			if(index.streamable) {
+				stream(index.uri, queue.list);
+				setView(index);
+			} else {
+				set();
+			}	
 			
 			//save to localStorage
 			localStorage.setItem('last-played', JSON.stringify(index));
-			localStorage.setItem('queue', JSON.stringify(tracks));
+			localStorage.setItem('queue', JSON.stringify(queue.list));
 
 			//start streaming
-			stream(index.uri, tracks);
-			setView(index);
 
 		}
 
 
-
-		var stream = function(track, queue, time) {
+		var stream = function(track, time) {
 
 			SC.stream(track, {
 
 				onfinish: function() { 
 					this.destruct();
-					checkQueue(queue);
+					checkQueue();
 				}
 
 			}, function(sound) {
@@ -243,6 +224,7 @@
 						//console.log('loading...');
 					}
 				});
+
 				bindButtons(sound);
 
 			});
@@ -268,15 +250,31 @@
 			$('li.trackInfo').html(html);
 		}
 
-		function checkQueue(queue) {
-			if(queue.length === 0) {
+		function checkQueue() {
+			var remainingSongs = queue.list;
+			if(remainingSongs.length === 0) {
 				refreshPlaylist();
 			} else {
-				set(queue);
+				set();
 			}
 		}
 
+		function shuffleTrack (track) {
+			track.destruct();
+			checkQueue();
+		}
+
 		function bindButtons(track) {
+
+			//turn off
+			$('#shuffle').off('click');
+			$('#playPause').off('click');
+
+			//before you turn on
+			$('#shuffle').click( function() {
+				console.log('shuffle');
+				shuffleTrack(track);
+			})
 
 			$('#playPause').click( function() {
 				track.togglePause();
