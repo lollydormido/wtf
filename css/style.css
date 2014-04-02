@@ -109,12 +109,13 @@ ul#links {
 #links > li {
 	list-style-type: none;
 	display: inline-block;
+	padding-left: 1px;
 }
 
 #soundcloud {
 	display: inline-block;
 	border: 0px;
-	width: 64px;
+	width: 43px;
 	height: 43px;
 	padding: 15px;
 	background-repeat: no-repeat;
@@ -129,11 +130,11 @@ ul#links {
 a#centbrains{
 	display: inline-block;
 	border: 0px;
-	width: 67px;
+	width: 43px;
 	height: 43px;
 	background-repeat: no-repeat;
 	background-size: 100%;
-	background: url('../img/99centbrains.png');
+	background: url('../img/99centbrains.jpg');
 }
 
 
