@@ -43,6 +43,10 @@ body > div.row.colophon > div {
 	padding: 2px;
 }
 
+.progress-bar {
+	background: pink;
+}
+
 ul#controls {
 
 	padding: 2px;
@@ -83,6 +87,16 @@ ul#controls {
 	height: auto;
 	display: inline-block;
 	float: left;
+}
+
+#controls > li.trackInfo > a > div.media {
+	height: 50px;
+}
+
+#controls > li.trackInfo > a > div > div.media-body {
+	position: absolute;
+	bottom: 5px;
+	margin-left: 52px;
 }
 
 /** buttons **/
@@ -146,7 +160,8 @@ a#centbrains{
 	}
 
 	#container > div > div > h1, #container > div > div > p{
-		background-color: #000;
+		/**background-color: #000;**/
+		text-shadow: 1px 2px 30px #000000;
 	}
 
 	#controls > li.trackInfo {
