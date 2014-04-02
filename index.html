@@ -53,7 +53,7 @@
 
 
 <div class="row colophon">
-	<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+	<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100"></div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<ul id="controls">
 			<li>
@@ -112,6 +112,11 @@
 			//get previously played tracks
 			var lastTrack = JSON.parse(localStorage.getItem('last-played'));
 			var oldeQueue = JSON.parse(localStorage.getItem('queue'));
+			var position = localStorage.getItem('position-width');
+
+			$('.progress-bar').fadeIn('fast', function() {
+				console.log('yo');
+			});
 
 			var time = localStorage.getItem('time');
 
@@ -160,7 +165,6 @@
 		function refreshPlaylist() {
 
 			SC.get('/users/33178966/favorites', function(tracks) {
-					console.log('starting tracks is: ' + tracks.length);
 					queue.list = tracks;
 					set();
 
@@ -181,11 +185,18 @@
 		    return o;
 		};
 
+		function Track(song) {
+			this.info = song;
+		}
+
+		var track = new Track();
+
 		function set() {
 
 			var shuffled = shuffle(queue.list);
 
 			var index = shuffled.shift();
+
 			queue.list = shuffled;
 
 			if(index.streamable) {
@@ -211,25 +222,31 @@
 				onfinish: function() { 
 					this.destruct();
 					checkQueue();
+				},
+
+				onplay: function() {
+					//setView(track.info);
 				}
 
 			}, function(sound) {
 
 
-				sound.load( {
+				sound.play( {
 
 					position: time,
 
 					whileplaying: function() {
 						localStorage.setItem('time', this.position);
-
+						
 						var width = (this.position / sound.duration) * 100;
+						localStorage.setItem('position-width', width);
 						$('.progress-bar').css('width', width + '%');
 					},
 
 					whileloading: function() {
 						//console.log('loading...');
 					}
+
 				});
 
 				bindButtons(sound);
@@ -239,6 +256,8 @@
 		}
 
 		function setView(track) {
+
+			$('.progress-bar').attr('aria-valuenow', '0').attr('style','width: ' + '0' );
 
 			var source = $('#track-template').html();
 			var template = Handlebars.compile(source);
@@ -255,6 +274,12 @@
 			var html = template(context);
 
 			$('li.trackInfo').html(html);
+		}
+
+		function pausedView(track) {
+			if(track.paused) {
+				//$('.trackInfo').html('<h4>Paused</h4>');
+			}
 		}
 
 		function checkQueue() {
@@ -301,6 +326,7 @@
 		function toggleControls(track) {
 			if(track.paused) {
 				$('#playPause > span').removeClass('glyphicon-play').addClass('glyphicon-pause');
+				pausedView(track);
 			} else {
 				$('#playPause > span').removeClass('glyphicon-pause').addClass('glyphicon-play');
 			}
