@@ -1,131 +1,390 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title> What the fuck should I listen to?</title>
-  <link rel="stylesheet" href="style.css" />
+  <title></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+	<link rel="stylesheet" href="./css/animations.css">
+	<link rel="stylesheet" href="./css/bootstrap.css" type="text/css">
+	<link rel="stylesheet" href="./css/style.css" type="text/css">
+
 </head>
 <body>
 
-<div id="container">
-	<div id="header">What the fuck should I listen to?</div>
-	
-	<div id="content">
-		<div id="listenTo"></div>
-		<div id="username" class="user"></div>
+	<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=252090111493728";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wtf.fm" data-text="⍾ wtf.fm | the best fucking way to find new music via @jiggabits + @butchershopsf" data-hashtags="WTFfm">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+<BR>
+
+<div class="fb-like" data-href="http://wtf.fm" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
+</div>
+
+
+	<ul id="links">
+
+		<li>
+			<a href="http://www.99centbrains.com" target="_blank" id="centbrains" style="background-size: 100%"></a> 
+		</li>
+		<li>
+			<a href="http://soundcloud.com/jiggabits" target="_blank" id="soundcloud" style="background-size: 100%"></a> 
+		</li>
+	</ul>
+
+	<div id="container">
+
+		<div class="row">
+			<div class="jumbotron col-md-6 col-md-offset-3">
+				<h1><div class="w pulse"></div> wtf.fm</h1>
+				<p>Because you don't know what the fuck to listen to.</p>
+			</div>
+		</div>
 	</div>
-	
-	<div id="track"></div>
-	
-	<div id="nav" class="navigate">
-		<a href="" id="somethingElse">I fucking hate this</a>
-		<a href="underground.html" id="somethingIndie">I want some fucking underground</a>
+
+
+<div class="row colophon">
+	<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100"></div>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<ul id="controls">
+			<li>
+				<button id="playPause"><span class="glyphicon glyphicon-play"></span></button>
+			</li>
+			<li>
+				<button id="shuffle">
+					<span class="glyphicon glyphicon-step-forward"></span>
+				</button>
+			</li>
+			<li class="nowPlaying">
+				Now Playing:
+			</li>
+			<li class="trackInfo">
+			</li>
+		</ul>
 	</div>
-	
-	<div id="shareValue"></div>
 
 </div>
 
-<div id="credits">	Made by <a class="jiggabitsLink" href="http://soundcloud.com/jiggabits">jiggabits</a>  &amp; <a class="butchershopLink" href="http://butchershopcreative.com/">Butchershop Creative</a></div>
-</footer>
-  </div>
+	    <script src="./js/jquery-1.11.0.min.js"></script>
+		<script src="./js/bootstrap.js"></script>
 
+		<script src="http://connect.soundcloud.com/sdk.js"></script>
 
+		<script>
 
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
-  <script type="text/javascript" src="http://w.soundcloud.com/player/api.js"></script>
-  <script type="text/javascript">
-    $(function() {
+		/**
+		Credit the uploader as the creator of the sound
+		Credit SoundCloud as the source by including one of the logos found here
+		Link to the SoundCloud URL containing the work
+		If the sound is private link to the profile of the creator
+		**/
 
-      SC.initialize({
-          client_id: "7kIeyF5f2ETFo1fEWKwNQ"
-      });
-
-      var hot_tracks, widget;
-
-      var greetings = [
-        'Listen to some fucking ',
-        'Bet you never fucking heard ',
-        'Your fucking ears will be graced by ',
-        'The fucking Music Gods have brought you ',
-        'Muh fucking Mozart is chanelled through ',
-        'Your life was fucking incomplete without ',
-        'Bro, fucking listen to '
-      ];
-
-
-	function getRandomTrack(aTag) {
-		this.randomTrack = containsAllUris[aTag][Math.floor(containsAllUris[aTag].length*Math.random())];
-		this.whatTag = aTag;
-		return randomTrack
-	      }
-
-	function getGreeting() {
-		$(".listenToGreeting").html(greetings[Math.floor(greetings.length * Math.random())]);
-		var soundCloudUser = this.randomTrack.user.username;
-		var soundCloudUserUrl = this.randomTrack.user.permalink_url;
-		$(".username a").attr("href",soundCloudUserUrl).html(soundCloudUser);
+	     /////// +++ LOCAL STORAGE +++ ////////
+		supports_html5_storage =  function() {
+		try {
+		  return 'localStorage' in window && window['localStorage'] !== null;
+		} catch (e) {
+		  return false;
+		}
 		}
 
-	function playNextTrack(widget) {
-		widget.load(getRandomTrack(this.whatTag).uri, {
-			auto_play: true,
-			sharing: false,
+		supports_html5_storage();
+
+		function Queue(tracks) {
+			this.list = tracks;
+		}
+
+		var queue = new Queue();
+
+		$(document).ready(function() {
+
+			
+
+			//get previously played tracks
+			var lastTrack = JSON.parse(localStorage.getItem('last-played'));
+			var oldeQueue = JSON.parse(localStorage.getItem('queue'));
+			var position = localStorage.getItem('position-width');
+
+			$('.progress-bar').fadeIn('fast', function() {
+				console.log('yo');
 			});
-		getGreeting();
+
+			var time = localStorage.getItem('time');
+
+			if (!lastTrack) {
+				refreshPlaylist();
+			  } else {
+			  	queue.list = oldeQueue;
+			  	stream(lastTrack.uri, time);
+			  	setView(lastTrack);
+			  }
+
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// initialize client with app credentials
+		SC.initialize({
+		  client_id: 'ba6d3bde0a8e5030d641e141cc357fdf',
+		  redirect_uri: 'http://localhost:8888/callback.html'
+		});
+
+		//99centbrains user id is: 33178966
+
+		/**SC.connect(function() {
+		  SC.get('/me/activities', function(activities) { 
+		   console.log(activities); 
+		  });
+		});**/
+
+		function refreshPlaylist() {
+
+			SC.get('/users/33178966/favorites', function(tracks) {
+					queue.list = tracks;
+					set();
+
+					//displayTracks(tracks);
+				});
 		}
 
 
-	function play(track) {
-		var currentTrack = null;
-		// SC Playing http://developers.soundcloud.com/docs/api/guide#playing
-		// SC oEmbed http://developers.soundcloud.com/docs/api/reference#oembed
-	
-	var allGreetings = greetings.length;
-	var whichGreeting = Math.floor(allGreetings * Math.random());
-	var listenTo = function () {
-		document.getElementById("listenTo").innerHTML = greetings[whichGreeting];
-	};
-	
-	listenTo();
-</script>
+		function displayTracks(tracks) {
 
-<script src="http://connect.soundcloud.com/sdk.js" type="text/JavaScript"></script>
-<script type="text/JavaScript">
-	SC.initialize({
-		client_id: "7kIeyF5f2ETFo1fEWKwNQ",
-	});
-	
-	var track;
-		
-	var getTrack = function() {
-		SC.get("/tracks?filter=public&order=hotness", {limit: 50}, function(tracks) {
-			var results = tracks.length;
-			var random = Math.floor(results*Math.random());
-			console.log(random);
-			track = tracks[random];
-			var soundCloudUser = track.user.username;
-			var soundCloudUserUrl = track.user.permalink_url;
-			document.getElementById("username").innerHTML = (' ' + '<a href="' + soundCloudUserUrl + '">' +  soundCloudUser+ '</a>');
-			SC.oEmbed(track.uri, document.getElementById("track"));
+		}
+
+
+		//+ Jonas Raoni Soares Silva
+		//@ http://jsfromhell.com/array/shuffle [v1.0]
+		function shuffle(o){ //v1.0
+		    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+		    return o;
+		};
+
+		function Track(song) {
+			this.info = song;
+		}
+
+		var track = new Track();
+
+		function set() {
+
+			var shuffled = shuffle(queue.list);
+
+			var index = shuffled.shift();
+
+			queue.list = shuffled;
+
+			if(index.streamable) {
+				stream(index.uri, queue.list);
+				setView(index);
+			} else {
+				set();
+			}	
+			
+			//save to localStorage
+			localStorage.setItem('last-played', JSON.stringify(index));
+			localStorage.setItem('queue', JSON.stringify(queue.list));
+
+			//start streaming
+
+		}
+
+
+		var stream = function(track, time) {
+
+			SC.stream(track, {
+
+				onfinish: function() { 
+					this.destruct();
+					checkQueue();
+				},
+
+				onplay: function() {
+					//setView(track.info);
+				}
+
+			}, function(sound) {
+
+
+				sound.play( {
+
+					position: time,
+
+					whileplaying: function() {
+						localStorage.setItem('time', this.position);
+						
+						var width = (this.position / sound.duration) * 100;
+						localStorage.setItem('position-width', width);
+						$('.progress-bar').css('width', width + '%');
+					},
+
+					whileloading: function() {
+						//console.log('loading...');
+					}
+
+				});
+
+				bindButtons(sound);
+
+>>>>>>> gh-pages
 			});
-	};
-	
-	getTrack();
-	
-	//var getDubstep = function() {
-		//SC.get("/tracks", {genres: 'dubstep'}, function(tracks) {
-		//	var results = tracks.length;
-		//	var random = Math.floor(results*Math.random());
-		//	var track = tracks[random];
-		//	SC.oEmbed(track.uri, document.getElementById("track"));
-		//	});
-		//};
-</script>
+
+		}
+
+		function setView(track) {
+
+			$('.progress-bar').attr('aria-valuenow', '0').attr('style','width: ' + '0' );
+
+			var source = $('#track-template').html();
+			var template = Handlebars.compile(source);
+
+			var permalink_url = track.permalink_url;
+			
+			var icon = (!track.artwork_url) ? './img/m.png' : track.artwork_url;
+			
+			var username = track.user.username;
+			var title = track.title;
+
+			var context = {permalink_url: permalink_url, icon: icon, username: username, title: title}
+
+			var html = template(context);
+
+			$('li.trackInfo').html(html);
+		}
+
+		function pausedView(track) {
+			if(track.paused) {
+				//$('.trackInfo').html('<h4>Paused</h4>');
+			}
+		}
+
+		function checkQueue() {
+			var remainingSongs = queue.list;
+			if(remainingSongs.length === 0) {
+				refreshPlaylist();
+			} else {
+				set();
+			}
+		}
+
+		function shuffleTrack (track) {
+			track.destruct();
+			checkQueue();
+		}
+
+		function bindButtons(track) {
+
+			//turn off
+			$('#shuffle').off('click');
+			$('#playPause').off('click');
+
+			//before you turn on
+			$('#shuffle').click( function() {
+				console.log('shuffle');
+				shuffleTrack(track);
+			})
+
+			$('#playPause').click( function() {
+				track.togglePause();
+				toggleControls(track);
+			});
+
+			//use spacebar to togglePause()
+			$(document).keypress(function(e) {
+				if ((e.which && e.which == 32) || (e.keyCode && e.keyCode == 32)) {  
+					track.togglePause();
+					toggleControls(track);
+				}
+			});
+
+		}
+
+		function toggleControls(track) {
+			if(track.paused) {
+				$('#playPause > span').removeClass('glyphicon-play').addClass('glyphicon-pause');
+				pausedView(track);
+			} else {
+				$('#playPause > span').removeClass('glyphicon-pause').addClass('glyphicon-play');
+			}
+		}
+
+		</script>
+
+		<!--** BACKGROUND SHIT**-->
+		<script>
+		$(function() {
+
+			$.ajax({
+				url: 'http://api.tumblr.com/v2/blog/gifyogurt.tumblr.com/posts?api_key=e5HGO63pDqbzDDpoVmGK2NVk83iDCSI0CynLzKhRlMmM4dUSmd&tag=fabstract',
+				dataType: 'jsonp',
+				success: function(data) {
+					var posts = data.response.posts;
+
+					var allBackgrounds = [];
+
+					for (i = 0; i < posts.length; i++) {
+						var photos = posts[i]['photos'];
+
+						allBackgrounds.push(photos[0]['alt_sizes'][0]['url']);
+
+						$(photos[0]['alt_sizes']).each( function() {
+							//console.log(this.url);
+						})
+
+					}
+
+					var background = allBackgrounds[Math.floor(Math.random()*allBackgrounds.length)];
+
+					console.log(background);
+
+					$('body').css('background', 'url("' + background + '")');
+					$('body').css('background-repeat', 'repeat');
+					$('body').css('background-position', 'center');
 
 
+				}
+			});
+		})
 
+		</script>
 
+		<!-- ** TEMPLATE SHIT ** -->
+		<script src="./js/handlebars-v1.3.0.js"></script>
+		<script id="track-template" type="text/x-handlebars-template">
+			<a class="pull-left" href="{{permalink_url}}">
+				<div class="media">
+				    <img class="media-object" src="{{icon}}" alt="{{title}}">
+				  <div class="media-body">
+				    <h4 class="media-heading">{{username}} - {{title}}</h4>
+				  </div>
+				</div>
+			</a>
+		</script>
 
 </body>
 </html>

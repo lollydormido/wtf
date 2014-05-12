@@ -1,0 +1,172 @@
+body {
+
+	background-color: #000;
+
+	color: #000;
+}
+
+#container > div > div {
+	color: #000;
+	font-weight: bold;
+}
+
+#container > div > div.jumbotron {
+	margin-top: 75px;
+	background-color: transparent;
+	color: #FFF;
+	border-radius: 0px;
+	border: 20px solid #FFF;
+}
+
+#container > div > div > h1, #container > div > div > p {
+	text-shadow: 1px 2px 30px #000000;
+}
+
+#container > div > div > h1 > div.w {
+	display:inline-block;
+	width: 60px;
+	height: 60px;
+	background: url('../img/w.png');
+	background-size: cover;
+}
+
+.colophon {
+	position: absolute;
+	margin: 0;	
+	width: 100%;
+	bottom: 0px;
+	background-color: #000;
+}
+
+/** CONTROLS **/
+body > div.row.colophon > div {
+	padding: 2px;
+}
+
+.progress-bar {
+	background: pink;
+}
+
+ul#controls {
+
+	padding: 2px;
+	margin-bottom: 2px;
+
+}
+
+#controls > li {
+	list-style-type: none;
+}
+
+#controls > li {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#controls > li.nowPlaying {
+	color: #FFF;
+	font-size: 2em;
+	width: 100px;
+	margin-right: 20px;
+	line-height: .75em;
+	vertical-align: middle;
+}
+
+#controls > li.trackInfo {
+	vertical-align: bottom;
+	color: #FFF;
+}
+
+#controls > li.trackInfo > a, #controls > li.trackInfo > a:hover {
+	color: #FFF;
+	text-decoration: none;
+}
+
+#controls > li.trackInfo > a > div > img {
+	width: 50px;
+	height: auto;
+	display: inline-block;
+	float: left;
+}
+
+#controls > li.trackInfo > a > div.media {
+	height: 50px;
+}
+
+#controls > li.trackInfo > a > div > div.media-body {
+	position: absolute;
+	bottom: 5px;
+	margin-left: 52px;
+}
+
+/** buttons **/
+#playPause, #shuffle {
+	border: 0px;
+	padding: 15px;
+	background-color: #FFFFFF;
+	color: #000;
+	width: 50px;
+	font-weight: bold;
+}
+
+/** LINKS **/
+
+ul#links {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	list-style: none;
+	padding: 0px;
+	text-align: right;
+}
+
+#links > li {
+	list-style-type: none;
+	display: inline-block;
+	padding-left: 1px;
+}
+
+#soundcloud {
+	display: inline-block;
+	border: 0px;
+	width: 43px;
+	height: 43px;
+	padding: 15px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background: url('../img/soundcloud.png');
+}
+
+#centbrains {
+	background-size: cover;
+}
+
+a#centbrains{
+	display: inline-block;
+	border: 0px;
+	width: 43px;
+	height: 43px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background: url('../img/99centbrains.jpg');
+}
+
+
+/** iPhone **/
+@media (max-width: 320px) {
+	#container > div > div.jumbotron {
+		margin-top: 0px;
+		border: 0px;
+	}
+
+	#container > div > div > h1, #container > div > div > p{
+		/**background-color: #000;**/
+		text-shadow: 1px 2px 30px #000000;
+	}
+
+	#controls > li.trackInfo {
+		margin-left: 0px;
+		margin-top: 2px;
+	}
+
+}
