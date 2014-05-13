@@ -147,8 +147,6 @@
 			this.list = tracks;
 
 			this.View = function() {
-				console.log('tryna do da view');
-				console.log('this list is ' + this.title);
 				$(this.list).each(function() {
 					$('#rotation').append(this.title + '<BR>');
 				})
@@ -175,7 +173,7 @@
 			var position = localStorage.getItem('position-width');
 
 			$('.progress-bar').fadeIn('fast', function() {
-				console.log('yo');
+
 			});
 
 			var time = localStorage.getItem('time');
@@ -229,7 +227,6 @@
 		    var maxHeight = 0;
 		    //Get all the element with class = col
 		    var panel = $(panel);
-		    console.log('panel is ' + panel)
 		    panel.css('height', 'auto');
 		    //Loop all the column
 		    panel.each(function() {       
@@ -240,7 +237,6 @@
 		    });
 		    //Set the height
 		    panel.height(maxHeight);
-		    console.log('maxhwight is = ' + maxHeight);
 		}
 
 
@@ -422,7 +418,6 @@
 
 			//before you turn on
 			$('#shuffle').click( function() {
-				console.log('shuffle');
 				shuffleTrack(track);
 			})
 
@@ -477,7 +472,6 @@
 
 					var background = allBackgrounds[Math.floor(Math.random()*allBackgrounds.length)];
 
-					console.log(background);
 
 					$('#section1').css('background', 'url("' + background + '")');
 					$('#section1').css('background-repeat', 'repeat');
