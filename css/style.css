@@ -1,8 +1,10 @@
+/** "alternate-gothic-no-3-d" **/
+
 body {
 
 	background-color: #000;
-
-	color: #000;
+	color: #FFFFFF;
+	font-family: "alternate-gothic-no-3-d";
 }
 
 #container > div > div {
@@ -10,19 +12,28 @@ body {
 	font-weight: bold;
 }
 
-#container > div > div.jumbotron {
-	margin-top: 75px;
+#section1 > div > div {
+	margin-top: 25px;
 	background-color: transparent;
-	color: #FFF;
+	color: transparent;
 	border-radius: 0px;
-	border: 20px solid #FFF;
 }
 
-#container > div > div > h1, #container > div > div > p {
+#section1 > div.row > div > h1 {
+	font-size: 7em;
+	text-shadow: 0px 0px 4px #fbfaf1;
+}
+
+#section1 > div.row > div > p {
+	font-size: 4em;
+	text-shadow: 0px 0px 4px #fbfaf1;
+}
+
+#section1 > div > div {
 	text-shadow: 1px 2px 30px #000000;
 }
 
-#container > div > div > h1 > div.w {
+#section1 > div > div > h1 > div {
 	display:inline-block;
 	width: 60px;
 	height: 60px;
@@ -30,8 +41,58 @@ body {
 	background-size: cover;
 }
 
+@-webkit-keyframes blinker {from{opacity:1.0;}to{opacity:0.0;}}
+@-moz-keyframes blinker {from{opacity:1.0;}to{opacity:0.0;}}
+@keyframes blinker {from{opacity:1.0;}to{opacity:0.0;}}
+
+.blink {
+	text-decoration: blink;
+	-webkit-animation-name: blinker;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+	-webkit-animation-duration: .6s;
+	-moz-animation-name: blinker;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+	-moz-animation-duration: .6s;
+	animation-name: blinker;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(1.0,0,0,1.0);
+	animation-duration: .6s;
+}
+
+
+#section2 {
+	min-height: 600px;
+	background-color: #000;
+	color: #FFFFFF;
+}
+
+#section2 > div.row {
+	color: #FFFFFF;
+	font-weight:normal;
+	margin-left: 0px;
+}
+
+#section2 > div.row > div.info {
+	font-size: 1.3em;
+}
+
+#rotation {
+	margin-bottom: 75px;
+}
+
+#section2 a {
+	color: pink;
+}
+
+#section2 a:hover {
+	text-decoration: underline;
+}
+
+
 .colophon {
-	position: absolute;
+	position: fixed;
 	margin: 0;	
 	width: 100%;
 	bottom: 0px;

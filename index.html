@@ -10,45 +10,89 @@
 	<link rel="stylesheet" href="./css/bootstrap.css" type="text/css">
 	<link rel="stylesheet" href="./css/style.css" type="text/css">
 
+	<script type="text/javascript" src="//use.typekit.net/ame7aba.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
 </head>
 <body>
 
-	<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=252090111493728";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wtf.fm" data-text="⍾ wtf.fm | the best fucking way to find new music via @jiggabits + @butchershopsf" data-hashtags="WTFfm">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-
-<BR>
-
-<div class="fb-like" data-href="http://wtf.fm" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
-</div>
-
-
-	<ul id="links">
-
-		<li>
-			<a href="http://www.99centbrains.com" target="_blank" id="centbrains" style="background-size: 100%"></a> 
-		</li>
-		<li>
-			<a href="http://soundcloud.com/jiggabits" target="_blank" id="soundcloud" style="background-size: 100%"></a> 
-		</li>
-	</ul>
 
 	<div id="container">
 
-		<div class="row">
-			<div class="jumbotron col-md-6 col-md-offset-3">
-				<h1><div class="w pulse"></div> wtf.fm</h1>
-				<p>Because you don't know what the fuck to listen to.</p>
+
+		<div id="section1" class="panel">
+
+				<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=252090111493728";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wtf.fm" data-text="⍾ wtf.fm | the best fucking way to find new music via @jiggabits + @butchershopsf" data-hashtags="WTFfm">Tweet</a>
+		
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+			<BR>
+
+			<div class="fb-like" data-href="http://wtf.fm" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
+
+
+			<ul id="links">
+
+				<li>
+					<a href="http://www.99centbrains.com" target="_blank" id="centbrains" style="background-size: 100%"></a> 
+				</li>
+				<li>
+					<a href="http://soundcloud.com/jiggabits" target="_blank" id="soundcloud" style="background-size: 100%"></a> 
+				</li>
+			</ul>
+
+
+
+
+
+			<div class="row">
+
+				<div class="jumbotron col-md-6 col-md-offset-3">
+					<h1><!--<div class="w pulse"></div> -->wtf.fm</h1>
+					<p>
+						Because you don't know what the fuck to listen to.<span class="blink" style="font-weight:800;font-family:courier">&#9608;</span></p>
+				</div>
 			</div>
+
 		</div>
+
+
+		<div id="section2" class="panel">
+
+
+			<div class="row">
+
+				<div class="col-md-6 info">
+					<h1>Credits</h1>
+
+					Estimated 2012.<BR><BR>
+
+					wtf.fm has since been rejuvenated to help introduce you to the best new music out there.  Powered by a little <a href="http://soundcloud.com/" target="_blank">SoundCloud</a> magic and a lot of <a href="http://99centbrains.com/" target="_blank">99centbrains</a> power.<BR><BR>
+
+					Have a question?  <a href="mailto:hello@99centbrains.com">Email us.</a>
+				</div>
+
+				<div class="col-md-6 info" id="rotation">
+					<h3>Get on this rotation:</h3>
+					We're always looking for new music to feature.  Send us a link to your track (on SoundCloud) to <a href="mailto:lols@99centbrains.com">lols@99centbrains.com</a>.
+
+					<h3>Rotation:</h3>
+				</div>
+
+			</div>
+
+
+		</div>
+
 	</div>
 
 
@@ -101,11 +145,21 @@
 
 		function Queue(tracks) {
 			this.list = tracks;
+
+			this.View = function() {
+				console.log('tryna do da view');
+				console.log('this list is ' + this.title);
+				$(this.list).each(function() {
+					$('#rotation').append(this.title + '<BR>');
+				})
+			}
 		}
 
 		var queue = new Queue();
 
 		$(document).ready(function() {
+
+		    setHeight('.panel');
 
 			
 
@@ -124,10 +178,36 @@
 				refreshPlaylist();
 			  } else {
 			  	queue.list = oldeQueue;
+			  	queue.View();
 			  	stream(lastTrack.uri, time);
 			  	setView(lastTrack);
 			  }
 
+		});
+
+
+		function setHeight(panel) {
+
+		    var maxHeight = 0;
+		    //Get all the element with class = col
+		    var panel = $(panel);
+		    console.log('panel is ' + panel)
+		    panel.css('height', 'auto');
+		    //Loop all the column
+		    panel.each(function() {       
+		        //Store the highest value
+		        if($(this).height() > maxHeight) {
+		            maxHeight = $(this).height();
+		        }
+		    });
+		    //Set the height
+		    panel.height(maxHeight);
+		    console.log('maxhwight is = ' + maxHeight);
+		}
+
+
+		$(window).resize(function() {
+		    setHeight('.panel');
 		});
 
 
@@ -251,7 +331,6 @@
 
 				bindButtons(sound);
 
->>>>>>> gh-pages
 			});
 
 		}
@@ -362,9 +441,9 @@
 
 					console.log(background);
 
-					$('body').css('background', 'url("' + background + '")');
-					$('body').css('background-repeat', 'repeat');
-					$('body').css('background-position', 'center');
+					$('#section1').css('background', 'url("' + background + '")');
+					$('#section1').css('background-repeat', 'repeat');
+					$('#section1').css('background-position', 'center');
 
 
 				}
@@ -372,6 +451,7 @@
 		})
 
 		</script>
+
 
 		<!-- ** TEMPLATE SHIT ** -->
 		<script src="./js/handlebars-v1.3.0.js"></script>
