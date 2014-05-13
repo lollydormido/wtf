@@ -59,7 +59,7 @@
 				<div class="jumbotron col-md-6 col-md-offset-3">
 					<h1><!--<div class="w pulse"></div> -->wtf.fm</h1>
 					<p>
-						Because you don't know what the fuck to listen to.<span class="blink" style="font-weight:800;font-family:courier">&#9608;</span></p>
+						<span id="custom">Because you don't know what the fuck to listen to.</span><input class="edit" value="Leave a message."><span class="blink" style="font-weight:800;font-family:courier">&#9608;</span></p>
 				</div>
 			</div>
 
@@ -161,6 +161,12 @@
 
 		    setHeight('.panel');
 
+		    var message = localStorage.getItem('custom-message');
+
+		    if(message) {
+		    	$('#custom').html(message);
+		    }
+
 			
 
 			//get previously played tracks
@@ -184,6 +190,38 @@
 			  }
 
 		});
+
+
+
+
+
+
+
+
+		$('#custom').on('click', function() {
+			$(this).hide();
+			$('.blink').hide();
+			$('.edit').css('display','inline-block').focus();
+		})
+
+		$('.edit').on('blur', function() {
+			$('#custom').show().html($('.edit').val());
+			$(this).hide();
+			$('.blink').show();
+		})
+
+		$('.edit').on('keyup', function() {
+			localStorage.setItem('custom-message', $(this).val());
+		})
+
+
+
+
+
+
+
+
+
 
 
 		function setHeight(panel) {

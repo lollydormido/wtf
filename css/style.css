@@ -62,6 +62,36 @@ body {
 }
 
 
+.edit {
+	display: none;
+	background-color: transparent;
+	text-shadow: 0px 0px 4px #fbfaf1;
+	border:0px;
+}
+
+.edit:focus {
+	border: 1px solid pink;
+	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #section2 {
 	min-height: 600px;
 	background-color: #000;
