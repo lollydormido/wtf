@@ -118,6 +118,20 @@
 
 </div>
 
+
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-52139670-1', 'wtf.fm');
+		  ga('send', 'pageview');
+
+		</script>
+
+
+
 	    <script src="./js/jquery-1.11.0.min.js"></script>
 		<script src="./js/bootstrap.js"></script>
 
@@ -156,8 +170,6 @@
 		var queue = new Queue();
 
 		$(document).ready(function() {
-
-		    setHeight('.panel');
 
 		    var message = localStorage.getItem('custom-message');
 
@@ -220,29 +232,6 @@
 
 
 
-
-
-		function setHeight(panel) {
-
-		    var maxHeight = 0;
-		    //Get all the element with class = col
-		    var panel = $(panel);
-		    panel.css('height', 'auto');
-		    //Loop all the column
-		    panel.each(function() {       
-		        //Store the highest value
-		        if($(this).height() > maxHeight) {
-		            maxHeight = $(this).height();
-		        }
-		    });
-		    //Set the height
-		    panel.height(maxHeight);
-		}
-
-
-		$(window).resize(function() {
-		    setHeight('.panel');
-		});
 
 
 
@@ -350,7 +339,7 @@
 					position: time,
 
 					whileplaying: function() {
-						localStorage.setItem('time', this.position);
+						//localStorage.setItem('time', this.position);
 						
 						var width = (this.position / sound.duration) * 100;
 						localStorage.setItem('position-width', width);

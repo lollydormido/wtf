@@ -1,15 +1,26 @@
 /** "alternate-gothic-no-3-d" **/
+html {
+	height: 100%;
+}
 
 body {
-
+	height: 100%;
 	background-color: #000;
 	color: #FFFFFF;
 	font-family: "alternate-gothic-no-3-d";
 }
 
+#container {
+	height: 100%;
+}
+
 #container > div > div {
 	color: #000;
 	font-weight: bold;
+}
+
+#section1 {
+	height: 100%;
 }
 
 #section1 > div > div {
