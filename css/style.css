@@ -203,7 +203,7 @@ ul#controls {
 
 #controls > li.trackInfo > a > div > div > h1.media-heading {
 	white-space: nowrap;
-	width: 200px;
+	/**width: 200px;**/
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
