@@ -58,6 +58,7 @@
 
 				<div class="jumbotron col-md-6 col-md-offset-3">
 					<h1><!--<div class="w pulse"></div> -->wtf.fm</h1>
+					
 					<p>
 						<span id="custom">Because you don't know what the fuck to listen to.</span><input class="edit" value="Leave a message."><span class="blink" style="font-weight:800;font-family:courier">&#9608;</span></p>
 				</div>
@@ -65,33 +66,6 @@
 
 		</div>
 
-
-		<div id="section2" class="panel">
-
-
-			<div class="row">
-
-				<div class="col-md-6 info">
-					<h1>Credits</h1>
-
-					Estimated 2012.<BR><BR>
-
-					wtf.fm has since been rejuvenated to help introduce you to the best new music out there.  Powered by a little <a href="http://soundcloud.com/" target="_blank">SoundCloud</a> magic and a lot of <a href="http://99centbrains.com/" target="_blank">99centbrains</a> power.<BR><BR>
-
-					Have a question?  <a href="mailto:hello@99centbrains.com">Email us.</a>
-				</div>
-
-				<div class="col-md-6 info" id="rotation">
-					<h3>Get on this rotation:</h3>
-					We're always looking for new music to feature.  Send us a link to your track (on SoundCloud) to <a href="mailto:lols@99centbrains.com">lols@99centbrains.com</a>.
-
-					<h3>Rotation:</h3>
-				</div>
-
-			</div>
-
-
-		</div>
 
 	</div>
 
@@ -113,6 +87,7 @@
 			</li>
 			<li class="trackInfo">
 			</li>
+
 		</ul>
 	</div>
 
@@ -132,7 +107,7 @@
 
 
 
-	    <script src="./js/jquery-1.11.0.min.js"></script>
+	  <script src="./js/jquery-1.11.0.min.js"></script>
 		<script src="./js/bootstrap.js"></script>
 
 		<script src="http://connect.soundcloud.com/sdk.js"></script>
@@ -165,6 +140,7 @@
 					$('#rotation').append(this.title + '<BR>');
 				})
 			}
+
 		}
 
 		var queue = new Queue();
@@ -218,9 +194,11 @@
 			$('#custom').show().html($('.edit').val());
 			$(this).hide();
 			$('.blink').show();
+			editing = false;
 		})
 
-		$('.edit').on('keyup', function() {
+		$('.edit').on('keyup', function(e) {
+			editing = true;
 			localStorage.setItem('custom-message', $(this).val());
 		})
 
@@ -259,25 +237,12 @@
 
 		//99centbrains user id is: 33178966
 
-		/**SC.connect(function() {
-		  SC.get('/me/activities', function(activities) { 
-		   console.log(activities); 
-		  });
-		});**/
-
 		function refreshPlaylist() {
 
 			SC.get('/users/33178966/favorites', function(tracks) {
 					queue.list = tracks;
 					set();
-
-					//displayTracks(tracks);
 				});
-		}
-
-
-		function displayTracks(tracks) {
-
 		}
 
 
@@ -341,9 +306,9 @@
 					whileplaying: function() {
 						//localStorage.setItem('time', this.position);
 						
-						var width = (this.position / sound.duration) * 100;
+						/**var width = (this.position / sound.duration) * 100;
 						localStorage.setItem('position-width', width);
-						$('.progress-bar').css('width', width + '%');
+						$('.progress-bar').css('width', width + '%');**/
 					},
 
 					whileloading: function() {
@@ -399,6 +364,8 @@
 			checkQueue();
 		}
 
+		var editing = false;
+
 		function bindButtons(track) {
 
 			//turn off
@@ -415,15 +382,20 @@
 				toggleControls(track);
 			});
 
-			//use spacebar to togglePause()
 			$(document).keypress(function(e) {
 				if ((e.which && e.which == 32) || (e.keyCode && e.keyCode == 32)) {  
-					track.togglePause();
-					toggleControls(track);
+					if(editing){
+						//do nothing
+					} else {
+						track.togglePause();
+						toggleControls(track);
+					}
 				}
 			});
 
 		}
+
+
 
 		function toggleControls(track) {
 			if(track.paused) {
@@ -481,7 +453,7 @@
 				<div class="media">
 				    <img class="media-object" src="{{icon}}" alt="{{title}}">
 				  <div class="media-body">
-				    <h4 class="media-heading">{{username}} - {{title}}</h4>
+				    <h1 class="media-heading">{{username}} - {{title}}</h1>
 				  </div>
 				</div>
 			</a>

@@ -201,6 +201,13 @@ ul#controls {
 	margin-left: 52px;
 }
 
+#controls > li.trackInfo > a > div > div > h1.media-heading {
+	white-space: nowrap;
+	width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 /** buttons **/
 #playPause, #shuffle {
 	border: 0px;
@@ -269,6 +276,10 @@ a#centbrains{
 	#controls > li.trackInfo {
 		margin-left: 0px;
 		margin-top: 2px;
+	}
+
+	h1.media-heading {
+		display: none;
 	}
 
 }
